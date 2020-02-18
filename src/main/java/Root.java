@@ -8,4 +8,6 @@ public class Root extends Node {
 	}
 
 	public ArrayList<Node> Nodes;
+
+	public int Size;
 }
