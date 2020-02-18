@@ -12,6 +12,8 @@ plugins {
 
     // Apply the application plugin to add support for building an application
     id 'application'
+
+    id 'eclipse'
 }
 
 // Define the main class for the application
@@ -32,4 +34,20 @@ repositories {
     // You can declare any Maven/Ivy/file repository here.
     jcenter()
     mavenCentral()
+}
+
+
+version = '1.0'
+sourceCompatibility = '1.7'
+targetCompatibility = '1.7'
+
+task fatJar (type: Jar) {
+	manifest {
+		attributes 'Implementation-Title' : 'checklist bot',
+		'Implementation-Version' : version,
+		'Main-Class' : mainClassName
+	}
+	baseName = project.name + '-all'
+	from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+	with jar
 }
