@@ -10,7 +10,7 @@ public class AppController {
 		 {
 			System.out.println("Commands:");
 			System.out.println();
-			System.out.println("text_file [file_path] #read text file and parse it with split by paragraph.");
+			System.out.println("text_file [Name] [file_path] #read text file and parse it with split by paragraph.");
 			System.out.println("statistics #show current storage statistics.");
 			System.out.println("open [file_path] #read stroage from file.");
 			System.out.println("save [file_path] #save stroage to file.");
@@ -24,8 +24,9 @@ public class AppController {
 		 		 switch(args[argIndex])
 		 		 {
 		 		 	case "text_file":
-		 				Storage.Root = Text.parseTextFile(args[argIndex+1]);
-		 				argIndex++;
+		 				Storage.Root = Text.parseTextFile(args[argIndex+2]);
+		 				Storage.Root.setName(args[argIndex+1]);
+		 				argIndex+=2;
 		 			break;
 		 			case "statistics":
 		 				if(Storage.Root != null) {

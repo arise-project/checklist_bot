@@ -1,12 +1,17 @@
+import java.util.ArrayList;
+
 public class TextController {
 
 	public Root parseTextFile(String fileName) {
 		System.out.println("Checklist file:" + fileName);
 
-		return null;
-	}
+		ParagraphTextParser parser = new ParagraphTextParser();
 
-	public String GetNextParagraphName(Root root) {
-		return "P"+String.valueOf(root.Size); 
+		ArrayList<Node> nodes = parser.parseTextFile(fileName);
+
+		Root root = new Root();
+		root.Nodes = nodes;
+
+		return root;
 	}
 }
