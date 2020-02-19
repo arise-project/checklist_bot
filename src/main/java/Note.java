@@ -1,10 +1,36 @@
 public class Note extends Node {
-	public String Name;
-	public String Text;
+	protected String Text;
 
-	public Note(String name, String text){
-		Key = name.hashCode() ^ text.hashCode();
-		Name = name;
+	public String getText(){
+		return Text;
+	}
+
+	public void setText(String text){
 		Text = text;
+	}
+
+	@Override
+	public boolean equals(Object obj){
+		if(obj == null){
+			return false;
+		}
+
+		Note other = (Note)obj;
+	
+		return Name.equals(other.getName()) && Text.equals(other.getText());
+	}
+	
+	@Override
+	public int hashCode() {
+		int result = 17;
+		if(Name != null){
+			result = 31 * result + Name.hashCode();
+		}
+
+		if(Text != null){
+			result = 31 * result + Text.hashCode();
+		}
+		
+		return result;
 	}
 }

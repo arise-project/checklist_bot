@@ -1,11 +1,17 @@
 import java.util.ArrayList;
 
 public class Paragraph extends Node {
-	public Paragraph(String name){
-		Key = name.hashCode();
-		Name = name;
+	protected ArrayList<Node> Nodes;
+	
+	public Paragraph(){
 		Nodes = new ArrayList<>();
 	}
 
-	public ArrayList<Node> Nodes;
+	public ArrayList<Node> getNodes(){
+		return Nodes;
+	}
+
+	public void setNodes(ArrayList<Node> nodes){
+		Nodes = nodes;
+	}
 }

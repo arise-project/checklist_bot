@@ -1,13 +1,14 @@
 import java.util.ArrayList;
 
-public class Root extends Node {
-	public Root(String name){
-		Key = name.hashCode();
-		Name = name;
-		Nodes = new ArrayList<>();
+public class Root extends Paragraph {
+
+	protected int Size;
+
+	public int getSize(){
+		return Size;
 	}
 
-	public ArrayList<Node> Nodes;
-
-	public int Size;
+	public void setSize(int size){
+		Size = size;
+	}
 }
