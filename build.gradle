@@ -23,6 +23,9 @@ dependencies {
     // This dependency is found on compile classpath of this component and consumers.
     compile 'com.google.guava:guava:23.0'
     compile 'org.json:json:20190722'
+    compile 'com.fasterxml.jackson.core:jackson-core:2.10.2'
+    compile 'com.fasterxml.jackson.core:jackson-annotations:2.10.2'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.10.2'
 
     // Use JUnit test framework
     testCompile 'junit:junit:4.12'

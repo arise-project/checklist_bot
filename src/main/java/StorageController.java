@@ -1,6 +1,9 @@
 import org.json.JSONObject;
+import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class StorageController {
 	public Root Root = new Root();
@@ -40,10 +43,22 @@ public class StorageController {
 					e1.printStackTrace();
 			}			
 		}
-		
 	}
 	
 	public Root open(String filePath){
-		return null;
+		
+		ObjectMapper mapper =  new ObjectMapper();
+
+		try {
+			File file = new File(filePath);	
+			Root root = mapper.readValue(file, Root.class);
+			this.Root = root;
+			
+		}
+		catch(IOException e){
+			e.printStackTrace();
+		}
+		
+		return this.Root;
 	}
 }
