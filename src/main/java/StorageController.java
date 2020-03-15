@@ -4,6 +4,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 
 public class StorageController {
 	public Root Root = new Root();
@@ -21,13 +22,16 @@ public class StorageController {
 			return;
 		}
 
-		JSONObject storage = new JSONObject(Root);
-
+		ObjectMapper mapper =  new ObjectMapper();
+		mapper.enableDefaultTyping();
+		mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
 		FileWriter writer = null;
 		try
 		{
+			String output = mapper.writeValueAsString(Root);
+			
 			writer = new FileWriter(filePath);
-			writer.write(storage.toString(4));	
+			writer.write(output);	
 		}
 		catch(IOException e){
 			e.printStackTrace();
@@ -68,7 +72,7 @@ public class StorageController {
 	{
 		Node result = walker.search(this.Root, nodeName);
 		if(result == null) {
-			System.out.println(nodeName + "note found ");
+			System.out.println(nodeName + " not found ");
 			return;
 		}
 

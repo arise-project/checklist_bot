@@ -1,5 +1,16 @@
 import java.util.ArrayList;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
 
+@JsonTypeInfo(
+	use = JsonTypeInfo.Id.NAME,
+	include = JsonTypeInfo.As.PROPERTY,
+	property = "type"
+)
+@JsonSubTypes({
+	@JsonSubTypes.Type( value = Note.class, name = "note" ),
+	@JsonSubTypes.Type( value = Paragraph.class, name = "paragraph" )
+})
 public class Node {
 	protected String Name;
 
