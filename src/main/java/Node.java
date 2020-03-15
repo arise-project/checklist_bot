@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Node {
 	protected String Name;
 
@@ -7,6 +9,20 @@ public class Node {
 
 	public void setName(String name){
 		Name = name;
+	}
+
+	protected ArrayList<NodeAttribute> Attributes;
+		
+	public Node(){
+		Attributes = new ArrayList<>();
+	}
+	
+	public ArrayList<NodeAttribute> getAttributes(){
+		return Attributes;
+	}
+	
+	public void setAttributes(ArrayList<NodeAttribute> attributes){
+		Attributes = attributes;
 	}
 
 	@Override

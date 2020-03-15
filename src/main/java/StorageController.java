@@ -7,6 +7,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class StorageController {
 	public Root Root = new Root();
+	private TreeWalker walker = new TreeWalker();
+	
 
 	public StorageController(){
 		Root.setName("Post AI Book");
@@ -61,4 +63,25 @@ public class StorageController {
 		
 		return this.Root;
 	}
+
+	public void addAttribute(String nodeName, NodeAttribute attribute)
+	{
+		Node result = walker.search(this.Root, nodeName);
+		if(result == null) {
+			System.out.println(nodeName + "note found ");
+			return;
+		}
+
+		for(NodeAttribute a : result.getAttributes()){
+			if(a.getName() == attribute.getName()){
+				a.setBValue(attribute.getBValue());
+				System.out.println(nodeName + " updated attribute "+ attribute.getName() + " value "+ attribute.getBValue());
+				return;
+			}
+		}
+
+		System.out.println(nodeName + " added attribute "+ attribute.getName() + " value "+ attribute.getBValue());
+		result.getAttributes().add(attribute);
+	}
+	
 }

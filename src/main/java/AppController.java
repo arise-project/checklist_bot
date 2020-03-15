@@ -14,6 +14,8 @@ public class AppController {
 			System.out.println("statistics #show current storage statistics.");
 			System.out.println("open [file_path] #read stroage from file.");
 			System.out.println("save [file_path] #save stroage to file.");
+			System.out.println("set_attr [node_name] #set named attribute to node as True.");
+			System.out.println("reset_attr [node_name] #set named attribute to node as True.");
 			System.out.println();
 			System.out.println("Commands works in sequence: command1 [paramater] command2 [paramater1] [paramater2] command3");
 		 }
@@ -40,6 +42,23 @@ public class AppController {
 		 			case "save":
 		 				if(Storage.Root != null) {
 		 					Storage.save(args[argIndex+1]);
+		 				}
+		 			case "set_attr":
+		 				if(Storage.Root != null) {
+		 					NodeAttribute a = new NodeAttribute();
+		 					a.setName(args[argIndex+1]);
+		 					a.setBValue(true);
+		 					Storage.addAttribute(args[argIndex+1], a);
+		 					argIndex++;
+		 				}
+		 			break;
+		 			case "reset_attr":
+		 				if(Storage.Root != null) {
+		 					NodeAttribute a = new NodeAttribute();
+		 					a.setName(args[argIndex+1]);
+		 					a.setBValue(null);
+		 					Storage.addAttribute(args[argIndex+1], a);
+		 					argIndex++;
 		 				}
 		 			break;
 		 		 }
