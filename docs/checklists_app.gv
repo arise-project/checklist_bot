@@ -1,0 +1,504 @@
+digraph "checklists_app"
+{
+
+bgcolor = "#ffffff"
+
+node [
+class = "node"
+,fillcolor = "#ff00ff",style = "filled"
+,width = "0.152778",height = "0.152778"
+,shape = "ellipse"
+,color = "#000000"
+,penwidth = "1"
+,"_vis_" = "label"
+];
+
+
+"N15" [
+pos = "-3.47222,4.51389!"
+,xlabel = "input path"
+]
+
+"N1" [
+pos = "-4.86111,4.51389!"
+,xlabel = "import file"
+]
+
+"N50" [
+pos = "-3.47222,-6.94444!"
+,xlabel = "status"
+]
+
+"N35" [
+pos = "-3.47222,-1.04167!"
+,xlabel = "select checklist"
+]
+
+"N58" [
+pos = "-4.86111,-4.16667!"
+]
+
+"N31" [
+pos = "-1.73611,1.73611!"
+,xlabel = "markers read"
+]
+
+"N21" [
+pos = "2.77778,3.81944!"
+,xlabel = "previous line"
+]
+
+"N7" [
+pos = "-3.47222,-6.25!"
+,xlabel = "select checklist"
+]
+
+"N18" [
+pos = "-4.86111,3.81944!"
+]
+
+"N32" [
+pos = "-3.47222,1.38889!"
+,xlabel = "search
+checklist"
+]
+
+"N30" [
+pos = "0.347222,0.347222!"
+,xlabel = "read merker"
+]
+
+"N45" [
+pos = "1.38889,-5.55556!"
+,xlabel = "importance"
+]
+
+"N39" [
+pos = "-3.47222,-4.16667!"
+,xlabel = "add checklist"
+]
+
+"N55" [
+pos = "-3.47222,-10.4167!"
+,xlabel = "print completes"
+]
+
+"N27" [
+pos = "2.77778,-0.347222!"
+,xlabel = "print checklist"
+]
+
+"N10" [
+pos = "-6.25,3.47222!"
+,xlabel = "start
+dialog"
+]
+
+"N38" [
+pos = "-1.73611,-2.43056!"
+,xlabel = "delete marker"
+]
+
+"N54" [
+pos = "-3.47222,-9.72222!"
+,xlabel = "print schemas"
+]
+
+"N4" [
+pos = "-4.86111,2.43056!"
+,xlabel = "checklists"
+]
+
+"N6" [
+pos = "-1.04167,-4.16667!"
+,xlabel = "checklist
+dialog"
+]
+
+"N24" [
+pos = "-1.73611,2.43056!"
+,xlabel = "name"
+]
+
+"N23" [
+pos = "2.77778,2.43056!"
+,xlabel = "add line to checklist"
+]
+
+"N36" [
+pos = "-1.73611,-1.04167!"
+,xlabel = "change name"
+]
+
+"N5" [
+pos = "-3.47222,-4.86111!"
+,xlabel = "delete checklist"
+]
+
+"N46" [
+pos = "1.38889,-6.25!"
+,xlabel = "skip line"
+]
+
+"N16" [
+pos = "1.04167,4.51389!"
+]
+
+"N51" [
+pos = "-3.47222,-7.63889!"
+,xlabel = "add marker"
+]
+
+"N42" [
+pos = "1.38889,-4.16667!"
+,xlabel = "complete"
+]
+
+"N3" [
+pos = "-3.47222,-5.55556!"
+,xlabel = "find all"
+]
+
+"N19" [
+pos = "-3.47222,2.43056!"
+,xlabel = "new checklist
+dialoge"
+]
+
+"N13" [
+pos = "-1.38889,3.81944!"
+,xlabel = "skip added lines"
+]
+
+"N44" [
+pos = "3.81944,-4.16667!"
+,xlabel = "read description"
+]
+
+"N11" [
+pos = "-6.25,3.47222!"
+]
+
+"N2" [
+pos = "-4.86111,3.81944!"
+,xlabel = "select file"
+]
+
+"N34" [
+pos = "-3.47222,0.347222!"
+,xlabel = "arrange
+checklists
+dialog"
+]
+
+"N26" [
+pos = "2.77778,0.347222!"
+,xlabel = "arrange checklist"
+]
+
+"N28" [
+pos = "1.04167,4.51389!"
+]
+
+"N41" [
+pos = "1.38889,-4.16667!"
+]
+
+"N20" [
+pos = "2.77778,4.51389!"
+,xlabel = "next line"
+]
+
+"N8" [
+pos = "-3.47222,-6.25!"
+]
+
+"N25" [
+pos = "2.77778,1.04167!"
+,xlabel = "add marker to checklist"
+]
+
+"N37" [
+pos = "-1.73611,-1.73611!"
+,xlabel = "add marker"
+]
+
+"N52" [
+pos = "-3.47222,-8.33333!"
+,xlabel = "use existing scheme"
+]
+
+"N47" [
+pos = "3.81944,-5.20833!"
+,xlabel = "select line"
+]
+
+"N9" [
+pos = "-4.86111,-4.16667!"
+,xlabel = "tasks
+dialog"
+]
+
+"N33" [
+pos = "2.77778,1.73611!"
+,xlabel = "search"
+]
+
+"N57" [
+pos = "-4.86111,-4.16667!"
+]
+
+"N53" [
+pos = "-3.47222,-9.02778!"
+,xlabel = "save as scheme"
+]
+
+"N12" [
+pos = "-6.25,3.47222!"
+]
+
+"N22" [
+pos = "2.77778,3.125!"
+,xlabel = "add  marker"
+]
+
+"N43" [
+pos = "1.38889,-4.86111!"
+,xlabel = "add marker"
+]
+
+"N56" [
+pos = "-2.08333,-8.33333!"
+,xlabel = "select
+scheme"
+]
+
+"N40" [
+pos = "1.38889,-4.16667!"
+]
+
+"N14" [
+pos = "-3.47222,3.81944!"
+,xlabel = "files list"
+]
+
+"N48" [
+pos = "1.38889,-3.47222!"
+,xlabel = "incomplite"
+]
+
+"N49" [
+pos = "1.38889,-6.94444!"
+,xlabel = "skip all"
+]
+
+"N29" [
+pos = "0.347222,-0.347222!"
+,xlabel = "arrange
+lines
+dialog"
+]
+
+"N17" [
+pos = "1.04167,4.51389!"
+,xlabel = "file
+dialog"
+]
+
+
+
+edge [
+class = "edge"
+,weight = "1"
+,penwidth = "1"
+,"_vis_" = "label"
+,"color" = "#a0a0a4"
+,"style" = "solid"
+];
+
+
+"N9" -> "N50" [id = "E54"
+];
+
+"N9" -> "N54" [id = "E60"
+];
+
+"N8" -> "N6" [id = "E41"
+];
+
+"N35" -> "N38" [id = "E33"
+];
+
+"N37" -> "N30" [id = "E30"
+];
+
+"N9" -> "N51" [id = "E55"
+];
+
+"N4" -> "N32" [id = "E27"
+];
+
+"N10" -> "N9" [id = "E3"
+];
+
+"N28" -> "N26" [id = "E16"
+];
+
+"N15" -> "N16" [id = "E8"
+];
+
+"N4" -> "N34" [id = "E28"
+];
+
+"N52" -> "N56" [id = "E57"
+];
+
+"N17" -> "N20" [id = "E10"
+];
+
+"N35" -> "N29" [id = "E34"
+];
+
+"N9" -> "N34" [id = "E38"
+];
+
+"N9" -> "N27" [id = "E36"
+];
+
+"N58" -> "N55" [id = "E61"
+];
+
+"N1" -> "N15" [id = "E7"
+];
+
+"N28" -> "N27" [id = "E17"
+];
+
+"N19" -> "N24" [id = "E21"
+];
+
+"N28" -> "N22" [id = "E12"
+];
+
+"N18" -> "N14" [id = "E5"
+];
+
+"N45" -> "N44" [id = "E51"
+];
+
+"N11" -> "N2" [id = "E2"
+];
+
+"N16" -> "N19" [id = "E14"
+];
+
+"N41" -> "N44" [id = "E50"
+];
+
+"N22" -> "N30" [id = "E9"
+];
+
+"N6" -> "N27" [id = "E42"
+];
+
+"N28" -> "N21" [id = "E11"
+];
+
+"N14" -> "N13" [id = "E6"
+];
+
+"N9" -> "N53" [id = "E59"
+];
+
+"N9" -> "N7" [id = "E40"
+];
+
+"N4" -> "N35" [id = "E29"
+];
+
+"N46" -> "N47" [id = "E52"
+];
+
+"N26" -> "N29" [id = "E19"
+];
+
+"N6" -> "N45" [id = "E47"
+];
+
+"N4" -> "N19" [id = "E24"
+];
+
+"N6" -> "N49" [id = "E49"
+];
+
+"N28" -> "N23" [id = "E13"
+];
+
+"N11" -> "N1" [id = "E1"
+];
+
+"N28" -> "N25" [id = "E15"
+];
+
+"N43" -> "N30" [id = "E43"
+];
+
+"N13" -> "N17" [id = "E20"
+];
+
+"N51" -> "N30" [id = "E53"
+];
+
+"N35" -> "N37" [id = "E32"
+];
+
+"N6" -> "N48" [id = "E46"
+];
+
+"N6" -> "N46" [id = "E48"
+];
+
+"N25" -> "N30" [id = "E18"
+];
+
+"N9" -> "N3" [id = "E37"
+];
+
+"N4" -> "N27" [id = "E25"
+];
+
+"N24" -> "N31" [id = "E22"
+];
+
+"N17" -> "N33" [id = "E26"
+];
+
+"N9" -> "N5" [id = "E39"
+];
+
+"N9" -> "N39" [id = "E35"
+];
+
+"N6" -> "N40" [id = "E44"
+];
+
+"N9" -> "N52" [id = "E58"
+];
+
+"N31" -> "N30" [id = "E23"
+];
+
+"N35" -> "N36" [id = "E31"
+];
+
+"N12" -> "N4" [id = "E4"
+];
+
+"N50" -> "N44" [id = "E56"
+];
+
+"N6" -> "N43" [id = "E45"
+];
+
+
+}
