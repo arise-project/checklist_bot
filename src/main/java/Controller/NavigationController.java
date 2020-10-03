@@ -1,3 +1,5 @@
+package Controllers;
+
 public class NavigationController {
 
 	public void printParagraphTree(){

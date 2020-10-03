@@ -1,3 +1,7 @@
+import Domain.Node;
+import Domain.Paragraph;
+import Domain.Root;
+
 import java.util.ArrayList;
 import java.util.Queue;
 import java.util.LinkedList;

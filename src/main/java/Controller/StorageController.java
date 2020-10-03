@@ -1,11 +1,15 @@
+package Controllers;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+
+import Domain.Root;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
 public class StorageController {
-	public Root Root = new Root();
+	public Domain.Root Root = new Root();
 	private TreeWalker walker = new TreeWalker();
 	
 

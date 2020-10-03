@@ -1,3 +1,6 @@
+import Domain.Node;
+import Domain.Note;
+
 import java.util.ArrayList;
 import java.io.File;
 import java.io.BufferedReader;
