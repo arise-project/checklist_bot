@@ -2,6 +2,7 @@ package Parser;
 
 import Domain.Node;
 import Domain.Note;
+import Parser.Interface.IParagraphTextParser;
 
 import java.util.ArrayList;
 import java.io.File;
@@ -10,7 +11,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 
-public class ParagraphTextParser implements Parser.Interface.IParagraphTextParser {
+public class ParagraphTextParser implements IParagraphTextParser {
 
 	@Override
 	public ArrayList<Node> parseTextFile(String filePath){

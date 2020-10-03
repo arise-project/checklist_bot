@@ -1,14 +1,22 @@
 package Controller;
 
 import Controller.Interface.IAppController;
+import Controller.Interface.IStorageController;
+import Controller.Interface.ITextController;
 import Domain.NodeAttribute;
 import Domain.Note;
 import Domain.Paragraph;
+import com.google.inject.Inject;
 
 public class AppController implements IAppController {
-	public NavigationController Navigation = new NavigationController();
-	public TextController Text = new TextController();
-	public StorageController Storage = new StorageController();
+	private final ITextController text;
+	private final IStorageController storage;
+
+	@Inject
+	public AppController(ITextController text, IStorageController storage) {
+		this.text = text;
+		this.storage = storage;
+	}
 
 	@Override
 	public void start(String[] args) {
@@ -32,38 +40,38 @@ public class AppController implements IAppController {
 		 		 switch(args[argIndex])
 		 		 {
 		 		 	case "text_file":
-		 				Storage.Root = Text.parseTextFile(args[argIndex+2]);
-		 				Storage.Root.setName(args[argIndex+1]);
+		 				storage.setRoot(text.parseTextFile(args[argIndex+2]));
+		 				storage.getRoot().setName(args[argIndex+1]);
 		 				argIndex+=2;
 		 			break;
 		 			case "statistics":
-		 				if(Storage.Root != null) {
-		 					System.out.println("Tree size: " + Storage.Root.getSize());
+		 				if(storage.getRoot() != null) {
+		 					System.out.println("Tree size: " + storage.getRoot().getSize());
 		 				}
 		 			break;
 		 			case "open":
-		 				Storage.Root = Storage.open(args[argIndex+1]);
+		 				storage.setRoot(storage.open(args[argIndex+1]));
 		 				argIndex++;
 		 			break;
 		 			case "save":
-		 				if(Storage.Root != null) {
-		 					Storage.save(args[argIndex+1]);
+		 				if(storage.getRoot() != null) {
+		 					storage.save(args[argIndex+1]);
 		 				}
 		 			case "set_attr":
-		 				if(Storage.Root != null) {
+		 				if(storage.getRoot() != null) {
 		 					NodeAttribute a = new NodeAttribute();
 		 					a.setName(args[argIndex+1]);
 		 					a.setBValue(true);
-		 					Storage.addAttribute(args[argIndex+1], a);
+		 					storage.addAttribute(args[argIndex+1], a);
 		 					argIndex++;
 		 				}
 		 			break;
 		 			case "reset_attr":
-		 				if(Storage.Root != null) {
+		 				if(storage.getRoot() != null) {
 		 					NodeAttribute a = new NodeAttribute();
 		 					a.setName(args[argIndex+1]);
 		 					a.setBValue(null);
-		 					Storage.addAttribute(args[argIndex+1], a);
+		 					storage.addAttribute(args[argIndex+1], a);
 		 					argIndex++;
 		 				}
 		 			break;

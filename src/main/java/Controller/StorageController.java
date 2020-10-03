@@ -4,25 +4,27 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import Algorithm.TreeWalker;
+import Algorithm.Interface.ITreeWalker;
 import Domain.Node;
 import Domain.NodeAttribute;
 import Domain.Root;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.google.inject.Inject;
 
 public class StorageController implements Controller.Interface.IStorageController {
-	public Domain.Root Root = new Root();
-	private TreeWalker walker = new TreeWalker();
-	
+	private Domain.Root root = new Root();
+	private final ITreeWalker walker;
 
-	public StorageController(){
-		Root.setName("Post AI Book");
+	@Inject
+	public StorageController(ITreeWalker walker){
+		this.walker = walker;
+		root.setName("Post AI Book");
 	}
 
 	@Override
 	public void save(String filePath){
-		if(Root == null)
+		if(root == null)
 		{
 			System.out.println("Can not save empty storage to "+ filePath);
 			return;
@@ -34,7 +36,7 @@ public class StorageController implements Controller.Interface.IStorageControlle
 		FileWriter writer = null;
 		try
 		{
-			String output = mapper.writeValueAsString(Root);
+			String output = mapper.writeValueAsString(root);
 			
 			writer = new FileWriter(filePath);
 			writer.write(output);	
@@ -65,20 +67,19 @@ public class StorageController implements Controller.Interface.IStorageControlle
 		try {
 			File file = new File(filePath);	
 			Root root = mapper.readValue(file, Root.class);
-			this.Root = root;
+			this.root = root;
 			
 		}
 		catch(IOException e){
 			e.printStackTrace();
 		}
 		
-		return this.Root;
+		return this.root;
 	}
 
 	@Override
-	public void addAttribute(String nodeName, NodeAttribute attribute)
-	{
-		Node result = walker.search(this.Root, nodeName);
+	public void addAttribute(String nodeName, NodeAttribute attribute)  {
+		Node result = walker.search(this.root, nodeName);
 		if(result == null) {
 			System.out.println(nodeName + " not found ");
 			return;
@@ -95,5 +96,12 @@ public class StorageController implements Controller.Interface.IStorageControlle
 		System.out.println(nodeName + " added attribute "+ attribute.getName() + " value "+ attribute.getBValue());
 		result.getAttributes().add(attribute);
 	}
-	
+
+	public void setRoot(Root root){
+		this.root = root;
+	}
+
+	public Root getRoot(){
+		return this.root;
+	}
 }
