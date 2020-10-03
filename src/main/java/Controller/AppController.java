@@ -6,6 +6,7 @@ import Controller.Interface.ITextController;
 import Domain.NodeAttribute;
 import Domain.Note;
 import Domain.Paragraph;
+import Domain.Root;
 import com.google.inject.Inject;
 
 public class AppController implements IAppController {
@@ -42,8 +43,9 @@ public class AppController implements IAppController {
 		 		 {
 		 		 	case "read_text_file":
 						System.out.println("read_text_file: " + args[argIndex+2] + " name: " + args[argIndex+1]);
-		 				storage.setRoot(text.parseTextFile(args[argIndex+2]));
-		 				storage.getRoot().setName(args[argIndex+1]);
+						Root root = text.parseTextFile(args[argIndex+2]);
+						root.setName(args[argIndex+1]);
+		 				storage.setRoot(root);
 		 				argIndex+=2;
 		 			break;
 		 			case "statistics":

@@ -20,4 +20,20 @@ public class NodeAttribute {
 	public void setBValue(Boolean bval){
 		BValue = bval;
 	}
+
+	@Override
+	public boolean equals(Object obj){
+		if(obj == null){
+			return false;
+		}
+
+		NodeAttribute other = (NodeAttribute)obj;
+
+		return Name.equals(other.getName());
+	}
+
+	@Override
+	public int hashCode() {
+		return Name.hashCode();
+	}
 }

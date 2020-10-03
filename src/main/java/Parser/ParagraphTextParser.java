@@ -48,8 +48,8 @@ public class ParagraphTextParser implements IParagraphTextParser {
 			{
 				if(count > 0)
 				{
-					node.setName(getNextParagraphName(index));
 					node.setText(sb.toString());
+					node.setName("NOTE_"+Integer.toString(node.hashCode()));
 					notes.add(node);
 					node = new Note();
 					sb = new StringBuilder();

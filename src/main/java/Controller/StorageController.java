@@ -3,6 +3,8 @@ package Controller;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import Algorithm.Interface.ITreeWalker;
 import Controller.Interface.IStorageController;
@@ -15,6 +17,8 @@ import com.google.inject.Inject;
 
 public class StorageController implements IStorageController {
 	private Domain.Root root = new Root();
+	Map<Integer,Node> dictionary = new HashMap<>();
+
 	private final ITreeWalker walker;
 	private String storageFile;
 
@@ -102,6 +106,7 @@ public class StorageController implements IStorageController {
 	@Override
 	public void setRoot(Root root){
 		this.root = root;
+		this.dictionary = walker.getInBreadth(root);
 	}
 
 	@Override
