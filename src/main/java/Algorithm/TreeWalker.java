@@ -8,7 +8,8 @@ import java.util.ArrayList;
 import java.util.Queue;
 import java.util.LinkedList;
 
-public class TreeWalker {
+public class TreeWalker implements Algorithm.Interface.ITreeWalker {
+	@Override
 	public Node search(Root root, String nodeName){
 		Queue<Node> nodes = new LinkedList<>();
 		nodes.add(root);

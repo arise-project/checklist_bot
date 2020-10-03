@@ -6,8 +6,9 @@ import Parser.ParagraphTextParser;
 
 import java.util.ArrayList;
 
-public class TextController {
+public class TextController implements Controller.Interface.ITextController {
 
+	@Override
 	public Root parseTextFile(String fileName) {
 		System.out.println("Checklist file:" + fileName);
 

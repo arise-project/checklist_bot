@@ -1,6 +1,6 @@
 package Controller.Interface;
 
-public interface AppController {
+public interface IAppController {
     void start(String[] args);
 
     void addRootParagraph();

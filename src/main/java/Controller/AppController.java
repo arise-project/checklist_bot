@@ -1,17 +1,17 @@
 package Controller;
 
+import Controller.Interface.IAppController;
 import Domain.NodeAttribute;
 import Domain.Note;
 import Domain.Paragraph;
 
-public class AppController {
-
-	
+public class AppController implements IAppController {
 	public NavigationController Navigation = new NavigationController();
 	public TextController Text = new TextController();
 	public StorageController Storage = new StorageController();
 
-	public void start(String[] args) {		
+	@Override
+	public void start(String[] args) {
 		 if(args.length == 0)
 		 {
 			System.out.println("Commands:");
@@ -72,19 +72,23 @@ public class AppController {
 		 }
 	}
 	
+	@Override
 	public void addRootParagraph() {
 		Paragraph p;
 	}
 
+	@Override
 	public void addRootNote(){
 		Note note;
 	}
 
+	@Override
 	public void addParagraph() {
 		Paragraph r;
 		Paragraph p;
 	}
 	
+	@Override
 	public void addNote(){
 		Paragraph r;
 		Note note;

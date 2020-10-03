@@ -10,8 +10,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 
-public class ParagraphTextParser {
+public class ParagraphTextParser implements Parser.Interface.IParagraphTextParser {
 
+	@Override
 	public ArrayList<Node> parseTextFile(String filePath){
 		ArrayList<Node> notes = new ArrayList<>();
 
@@ -65,6 +66,7 @@ public class ParagraphTextParser {
 		return notes;
 	}
 
+	@Override
 	public String getNextParagraphName(int index) {
 		return "P"+String.valueOf(index); 
 	}

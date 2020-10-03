@@ -11,7 +11,7 @@ import Domain.Root;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
-public class StorageController {
+public class StorageController implements Controller.Interface.IStorageController {
 	public Domain.Root Root = new Root();
 	private TreeWalker walker = new TreeWalker();
 	
@@ -20,6 +20,7 @@ public class StorageController {
 		Root.setName("Post AI Book");
 	}
 
+	@Override
 	public void save(String filePath){
 		if(Root == null)
 		{
@@ -56,6 +57,7 @@ public class StorageController {
 		}
 	}
 	
+	@Override
 	public Root open(String filePath){
 		
 		ObjectMapper mapper =  new ObjectMapper();
@@ -73,6 +75,7 @@ public class StorageController {
 		return this.Root;
 	}
 
+	@Override
 	public void addAttribute(String nodeName, NodeAttribute attribute)
 	{
 		Node result = walker.search(this.Root, nodeName);
