@@ -1,3 +1,5 @@
+package Algorithm;
+
 import Domain.Node;
 import Domain.Paragraph;
 import Domain.Root;

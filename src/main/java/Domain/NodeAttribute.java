@@ -1,3 +1,5 @@
+package Domain;
+
 public class NodeAttribute {
 	protected String Name;
 

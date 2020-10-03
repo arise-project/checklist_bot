@@ -1,3 +1,5 @@
+package Domain;
+
 import java.util.ArrayList;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonSubTypes;

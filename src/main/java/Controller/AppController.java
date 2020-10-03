@@ -1,4 +1,8 @@
-package Controllers;
+package Controller;
+
+import Domain.NodeAttribute;
+import Domain.Note;
+import Domain.Paragraph;
 
 public class AppController {
 
@@ -34,7 +38,7 @@ public class AppController {
 		 			break;
 		 			case "statistics":
 		 				if(Storage.Root != null) {
-		 					System.out.println("Tree size: " + Storage.Root.Size);
+		 					System.out.println("Tree size: " + Storage.Root.getSize());
 		 				}
 		 			break;
 		 			case "open":

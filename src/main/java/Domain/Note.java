@@ -1,3 +1,5 @@
+package Domain;
+
 public class Note extends Node {
 	protected String Text;
 

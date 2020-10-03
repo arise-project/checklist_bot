@@ -1,4 +1,8 @@
-package Controllers;
+package Controller;
+
+import Domain.Node;
+import Domain.Root;
+import Parser.ParagraphTextParser;
 
 import java.util.ArrayList;
 
@@ -12,7 +16,7 @@ public class TextController {
 		ArrayList<Node> nodes = parser.parseTextFile(fileName);
 
 		Root root = new Root();
-		root.Nodes = nodes;
+		root.setNodes(nodes);
 
 		return root;
 	}
