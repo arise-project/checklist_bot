@@ -13,4 +13,6 @@ public interface IStorageController {
     void setRoot(Root root);
 
     Root getRoot();
+
+    String getStorageFile();
 }

@@ -19,7 +19,6 @@ public class TextController implements ITextController {
 
 	@Override
 	public Root parseTextFile(String fileName) {
-		System.out.println("Checklist file:" + fileName);
 
 		ArrayList<Node> nodes = parser.parseTextFile(fileName);
 

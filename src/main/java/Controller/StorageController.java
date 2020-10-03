@@ -16,6 +16,7 @@ import com.google.inject.Inject;
 public class StorageController implements IStorageController {
 	private Domain.Root root = new Root();
 	private final ITreeWalker walker;
+	private String storageFile;
 
 	@Inject
 	public StorageController(ITreeWalker walker){
@@ -40,7 +41,8 @@ public class StorageController implements IStorageController {
 			String output = mapper.writeValueAsString(root);
 			
 			writer = new FileWriter(filePath);
-			writer.write(output);	
+			writer.write(output);
+			storageFile = filePath;
 		}
 		catch(IOException e){
 			e.printStackTrace();
@@ -61,14 +63,13 @@ public class StorageController implements IStorageController {
 	
 	@Override
 	public Root open(String filePath){
-		
 		ObjectMapper mapper =  new ObjectMapper();
 
 		try {
 			File file = new File(filePath);	
 			Root root = mapper.readValue(file, Root.class);
 			this.root = root;
-			
+			storageFile = filePath;
 		}
 		catch(IOException e){
 			e.printStackTrace();
@@ -95,6 +96,7 @@ public class StorageController implements IStorageController {
 
 		System.out.println(nodeName + " added attribute "+ attribute.getName() + " value "+ attribute.getBValue());
 		result.getAttributes().add(attribute);
+		storageFile = null;
 	}
 
 	@Override
@@ -105,5 +107,13 @@ public class StorageController implements IStorageController {
 	@Override
 	public Root getRoot(){
 		return this.root;
+	}
+
+	@Override
+	public String getStorageFile(){
+		if(storageFile == null){
+			return "IN_MEMORY";
+		}
+		return storageFile;
 	}
 }

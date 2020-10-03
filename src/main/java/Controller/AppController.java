@@ -20,6 +20,7 @@ public class AppController implements IAppController {
 
 	@Override
 	public void start(String[] args) {
+
 		 if(args.length == 0)
 		 {
 			System.out.println("Commands:");
@@ -40,24 +41,29 @@ public class AppController implements IAppController {
 		 		 switch(args[argIndex])
 		 		 {
 		 		 	case "read_text_file":
+						System.out.println("read_text_file: " + args[argIndex+2] + " name: " + args[argIndex+1]);
 		 				storage.setRoot(text.parseTextFile(args[argIndex+2]));
 		 				storage.getRoot().setName(args[argIndex+1]);
 		 				argIndex+=2;
 		 			break;
 		 			case "statistics":
+						System.out.println("statistics: " + storage.getStorageFile());
 		 				if(storage.getRoot() != null) {
 		 					System.out.println("Tree size: " + storage.getRoot().getSize());
 		 				}
 		 			break;
 		 			case "open_storage":
+						System.out.println("open_storage: " + args[argIndex+1]);
 		 				storage.setRoot(storage.open(args[argIndex+1]));
 		 				argIndex++;
 		 			break;
 		 			case "save_storage":
+						System.out.println("save_storage: " + args[argIndex+1]);
 		 				if(storage.getRoot() != null) {
 		 					storage.save(args[argIndex+1]);
 		 				}
 		 			case "set_battr":
+						System.out.println("set_battr: " + args[argIndex+1]);
 		 				if(storage.getRoot() != null) {
 		 					NodeAttribute a = new NodeAttribute();
 		 					a.setName(args[argIndex+1]);
@@ -67,6 +73,7 @@ public class AppController implements IAppController {
 		 				}
 		 			break;
 		 			case "reset_attr":
+						System.out.println("reset_attr: " + args[argIndex+1]);
 		 				if(storage.getRoot() != null) {
 		 					NodeAttribute a = new NodeAttribute();
 		 					a.setName(args[argIndex+1]);
