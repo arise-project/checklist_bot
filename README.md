@@ -1,7 +1,9 @@
 # checklist_bot
 
-gradle run --args="text_file \'Post AI book\' /home/user/46f836ee257e57280b1bac56c5164f65dcfcfbbe/Downloads/PostAi.txt save /home/user/46f836ee257e57280b1bac56c5164f65dcfcfbbe/Projects/PostAIBook/text.json set_attr P90"
+Gradle install: https://yallalabs.com/devops/how-to-install-gradle-ubuntu-18-04-ubuntu-16-04/
 
-gradle run --args="open /home/user/46f836ee257e57280b1bac56c5164f65dcfcfbbe/Projects/PostAIBook/text.json set_attr P90"
+source /etc/profile.d/gradle.sh
 
+gradle run --args="read_text_file \'English for Career Development\' /home/eugene/Documents/English_for_Career_Development set_battr P0 save_storage /home/eugene/Documents/text.json"
+    
 

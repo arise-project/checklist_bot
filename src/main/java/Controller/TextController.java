@@ -1,5 +1,6 @@
 package Controller;
 
+import Controller.Interface.ITextController;
 import Domain.Node;
 import Domain.Root;
 import Parser.Interface.IParagraphTextParser;
@@ -7,7 +8,7 @@ import com.google.inject.Inject;
 
 import java.util.ArrayList;
 
-public class TextController implements Controller.Interface.ITextController {
+public class TextController implements ITextController {
 
 	private final IParagraphTextParser parser;
 

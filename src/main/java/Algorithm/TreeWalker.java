@@ -1,5 +1,6 @@
 package Algorithm;
 
+import Algorithm.Interface.ITreeWalker;
 import Domain.Node;
 import Domain.Paragraph;
 import Domain.Root;
@@ -8,7 +9,8 @@ import java.util.ArrayList;
 import java.util.Queue;
 import java.util.LinkedList;
 
-public class TreeWalker implements Algorithm.Interface.ITreeWalker {
+public class TreeWalker implements ITreeWalker {
+
 	@Override
 	public Node search(Root root, String nodeName){
 		Queue<Node> nodes = new LinkedList<>();

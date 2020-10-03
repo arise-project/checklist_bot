@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import Algorithm.Interface.ITreeWalker;
+import Controller.Interface.IStorageController;
 import Domain.Node;
 import Domain.NodeAttribute;
 import Domain.Root;
@@ -12,7 +13,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.google.inject.Inject;
 
-public class StorageController implements Controller.Interface.IStorageController {
+public class StorageController implements IStorageController {
 	private Domain.Root root = new Root();
 	private final ITreeWalker walker;
 
@@ -51,7 +52,6 @@ public class StorageController implements Controller.Interface.IStorageControlle
 					writer.flush();
 					writer.close();				
 				}
-					
 			}
 			catch(IOException e1){
 					e1.printStackTrace();
@@ -97,10 +97,12 @@ public class StorageController implements Controller.Interface.IStorageControlle
 		result.getAttributes().add(attribute);
 	}
 
+	@Override
 	public void setRoot(Root root){
 		this.root = root;
 	}
 
+	@Override
 	public Root getRoot(){
 		return this.root;
 	}

@@ -24,12 +24,12 @@ public class AppController implements IAppController {
 		 {
 			System.out.println("Commands:");
 			System.out.println();
-			System.out.println("text_file [Name] [file_path] #read text file and parse it with split by paragraph.");
+			System.out.println("read_text_file [Name] [file_path] #read text file and parse it with split by paragraph.");
 			System.out.println("statistics #show current storage statistics.");
-			System.out.println("open [file_path] #read storage from file.");
-			System.out.println("save [file_path] #save storage to file.");
-			System.out.println("set_attr [node_name] #set named attribute to node as True.");
-			System.out.println("reset_attr [node_name] #set named attribute to node as True.");
+			System.out.println("open_storage [file_path] #read storage from file.");
+			System.out.println("save_storage [file_path] #save storage to file.");
+			System.out.println("set_battr [node_name] #set named attribute to True.");
+			System.out.println("reset_attr [node_name] #reset named attribute.");
 			System.out.println();
 			System.out.println("Commands works in sequence: command1 [parameter] command2 [parameter1] [parameter2] command3");
 		 }
@@ -39,7 +39,7 @@ public class AppController implements IAppController {
 		 {
 		 		 switch(args[argIndex])
 		 		 {
-		 		 	case "text_file":
+		 		 	case "read_text_file":
 		 				storage.setRoot(text.parseTextFile(args[argIndex+2]));
 		 				storage.getRoot().setName(args[argIndex+1]);
 		 				argIndex+=2;
@@ -49,15 +49,15 @@ public class AppController implements IAppController {
 		 					System.out.println("Tree size: " + storage.getRoot().getSize());
 		 				}
 		 			break;
-		 			case "open":
+		 			case "open_storage":
 		 				storage.setRoot(storage.open(args[argIndex+1]));
 		 				argIndex++;
 		 			break;
-		 			case "save":
+		 			case "save_storage":
 		 				if(storage.getRoot() != null) {
 		 					storage.save(args[argIndex+1]);
 		 				}
-		 			case "set_attr":
+		 			case "set_battr":
 		 				if(storage.getRoot() != null) {
 		 					NodeAttribute a = new NodeAttribute();
 		 					a.setName(args[argIndex+1]);
