@@ -1,14 +1,10 @@
-import java.io.IOException;
+import com.google.inject.*;
 
 public class App {
 	public static AppController Controller = new AppController();
-	
-    public String getGreeting() {
-        return "Hello world.";
-    }
 
     public static void main(String[] args) {
-		
+        Injector injector = Guice.createInjector(new BasicModule());
         Controller.start(args);
     }
 }

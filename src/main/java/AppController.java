@@ -12,12 +12,12 @@ public class AppController {
 			System.out.println();
 			System.out.println("text_file [Name] [file_path] #read text file and parse it with split by paragraph.");
 			System.out.println("statistics #show current storage statistics.");
-			System.out.println("open [file_path] #read stroage from file.");
-			System.out.println("save [file_path] #save stroage to file.");
+			System.out.println("open [file_path] #read storage from file.");
+			System.out.println("save [file_path] #save storage to file.");
 			System.out.println("set_attr [node_name] #set named attribute to node as True.");
 			System.out.println("reset_attr [node_name] #set named attribute to node as True.");
 			System.out.println();
-			System.out.println("Commands works in sequence: command1 [paramater] command2 [paramater1] [paramater2] command3");
+			System.out.println("Commands works in sequence: command1 [parameter] command2 [parameter1] [parameter2] command3");
 		 }
 		 
 		 int argIndex = 0;
