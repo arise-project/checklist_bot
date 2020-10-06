@@ -1,2 +1,5 @@
-package Command.Interface;public class IStorageCommandBus {
+package Command.Interface;
+
+public interface IStorageCommandBus {
+    <TCommand extends IStorageCommand> void Dispatch(TCommand command);
 }

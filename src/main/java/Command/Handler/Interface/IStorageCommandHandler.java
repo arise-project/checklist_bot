@@ -1,5 +1,8 @@
 package Command.Handler.Interface;
 
-public interface ICommandHandler<TCommand> {
-    void Handle(TCommand command);
+import Command.StorageCommandType;
+
+public interface IStorageCommandHandler<TCommand> {
+    StorageCommandType getType();
+    void handle(TCommand command);
 }

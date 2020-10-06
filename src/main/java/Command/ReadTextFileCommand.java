@@ -1,6 +1,8 @@
 package Command;
 
-public class ReadTextFileCommnad implements IStorageCommand {
+import Command.Interface.IStorageCommand;
+
+public class ReadTextFileCommand implements IStorageCommand {
     private String fileName;
 
     public String getFileName(){
@@ -11,8 +13,24 @@ public class ReadTextFileCommnad implements IStorageCommand {
         this.fileName = fileName;
     }
 
+    private String name;
+
+    public String getName(){
+        return name;
+    }
+
+    public void setName(String name){
+        this.name = name;
+    }
+
+    @Override
+    public StorageCommandType getType() {
+        return StorageCommandType.ReadTextFile;
+    }
+
     @Override
     public void setAttributes(String[] attributes) {
-        fileName = attributes[0];
+        name = attributes[0];
+        fileName = attributes[1];
     }
 }

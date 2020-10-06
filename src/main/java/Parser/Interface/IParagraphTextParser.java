@@ -6,6 +6,4 @@ import java.util.ArrayList;
 
 public interface IParagraphTextParser {
     ArrayList<Node> parseTextFile(String filePath);
-
-    String getNextParagraphName(int index);
 }

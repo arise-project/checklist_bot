@@ -1,6 +1,6 @@
 package Command;
 
-public enum CommandType {
+public enum StorageCommandType {
     ReadTextFile,
     Statistics,
     OpenStorage,

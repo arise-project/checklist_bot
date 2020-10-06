@@ -49,7 +49,7 @@ public class ParagraphTextParser implements IParagraphTextParser {
 				if(count > 0)
 				{
 					node.setText(sb.toString());
-					node.setName("NOTE_"+Integer.toString(node.hashCode()));
+					node.setName("NOTE_"+ node.hashCode());
 					notes.add(node);
 					node = new Note();
 					sb = new StringBuilder();
@@ -65,10 +65,5 @@ public class ParagraphTextParser implements IParagraphTextParser {
 		while(st != null);
 
 		return notes;
-	}
-
-	@Override
-	public String getNextParagraphName(int index) {
-		return "P"+String.valueOf(index); 
 	}
 }

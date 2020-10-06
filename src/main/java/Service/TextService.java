@@ -19,7 +19,6 @@ public class TextService implements ITextService {
 
 	@Override
 	public void parseTextFile(Root root, String fileName) {
-
 		ArrayList<Node> nodes = parser.parseTextFile(fileName);
 		root.setNodes(nodes);
 	}
