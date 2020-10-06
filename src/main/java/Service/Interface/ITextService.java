@@ -1,7 +1,7 @@
-package Controller.Interface;
+package Service.Interface;
 
 import Domain.Root;
 
-public interface ITextController {
-    Root parseTextFile(String fileName);
+public interface ITextService {
+    void parseTextFile(Root root, String fileName);
 }

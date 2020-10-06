@@ -1,2 +1,4 @@
-package Command;public class SaveStorageCommand {
+package Command;
+
+public class SaveStorageCommand {
 }

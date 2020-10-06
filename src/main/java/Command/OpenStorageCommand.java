@@ -1,2 +1,4 @@
-package Command;public class OpenStorageCommand {
+package Command;
+
+public class OpenStorageCommand {
 }

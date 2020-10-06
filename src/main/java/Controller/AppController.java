@@ -1,8 +1,8 @@
 package Controller;
 
 import Controller.Interface.IAppController;
-import Controller.Interface.IStorageController;
-import Controller.Interface.ITextController;
+import Repository.Interface.IStorageRepository;
+import Service.Interface.ITextService;
 import Domain.NodeAttribute;
 import Domain.Note;
 import Domain.Paragraph;
@@ -10,11 +10,11 @@ import Domain.Root;
 import com.google.inject.Inject;
 
 public class AppController implements IAppController {
-	private final ITextController text;
-	private final IStorageController storage;
+	private final ITextService text;
+	private final IStorageRepository storage;
 
 	@Inject
-	public AppController(ITextController text, IStorageController storage) {
+	public AppController(ITextService text, IStorageRepository storage) {
 		this.text = text;
 		this.storage = storage;
 	}
@@ -43,9 +43,8 @@ public class AppController implements IAppController {
 		 		 {
 		 		 	case "read_text_file":
 						System.out.println("read_text_file: " + args[argIndex+2] + " name: " + args[argIndex+1]);
-						Root root = text.parseTextFile(args[argIndex+2]);
-						root.setName(args[argIndex+1]);
-		 				storage.setRoot(root);
+						storage.getRoot().setName(args[argIndex+1]);
+						text.parseTextFile(storage.getRoot(), args[argIndex+2]);
 		 				argIndex+=2;
 		 			break;
 		 			case "statistics":
@@ -53,10 +52,13 @@ public class AppController implements IAppController {
 		 				if(storage.getRoot() != null) {
 		 					System.out.println("Tree size: " + storage.getRoot().getSize());
 		 				}
+		 				else {
+							System.out.println("Storage is EMPTY");
+						}
 		 			break;
 		 			case "open_storage":
 						System.out.println("open_storage: " + args[argIndex+1]);
-		 				storage.setRoot(storage.open(args[argIndex+1]));
+		 				storage.open(args[argIndex+1]);
 		 				argIndex++;
 		 			break;
 		 			case "save_storage":

@@ -1,2 +1,4 @@
-package Command;public class ResetAttrCommand {
+package Command;
+
+public class ResetAttrCommand {
 }

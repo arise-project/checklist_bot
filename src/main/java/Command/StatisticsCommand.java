@@ -1,2 +1,4 @@
-package Command;public class StatisticsCommand {
+package Command;
+
+public class StatisticsCommand {
 }

@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import Algorithm.Interface.ITreeWalker;
-import Repository.Interface.IStorageService;
+import Repository.Interface.IStorageRepository;
 import Domain.Node;
 import Domain.NodeAttribute;
 import Domain.Root;
@@ -15,7 +15,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.google.inject.Inject;
 
-public class StorageService implements IStorageService {
+public class StorageRepository implements IStorageRepository {
 	private Domain.Root root = new Root();
 	Map<Integer,Node> dictionary = new HashMap<>();
 
@@ -23,7 +23,7 @@ public class StorageService implements IStorageService {
 	private String storageFile;
 
 	@Inject
-	public StorageService(ITreeWalker walker){
+	public StorageRepository(ITreeWalker walker){
 		this.walker = walker;
 		root.setName("Post AI Book");
 	}
@@ -66,20 +66,18 @@ public class StorageService implements IStorageService {
 	}
 	
 	@Override
-	public Root open(String filePath){
+	public void open(String filePath){
 		ObjectMapper mapper =  new ObjectMapper();
 
 		try {
 			File file = new File(filePath);	
 			Root root = mapper.readValue(file, Root.class);
-			this.root = root;
+			setRoot(root);
 			storageFile = filePath;
 		}
 		catch(IOException e){
 			e.printStackTrace();
 		}
-		
-		return this.root;
 	}
 
 	@Override
@@ -104,12 +102,6 @@ public class StorageService implements IStorageService {
 	}
 
 	@Override
-	public void setRoot(Root root){
-		this.root = root;
-		this.dictionary = walker.getInBreadth(root);
-	}
-
-	@Override
 	public Root getRoot(){
 		return this.root;
 	}
@@ -120,5 +112,10 @@ public class StorageService implements IStorageService {
 			return "IN_MEMORY";
 		}
 		return storageFile;
+	}
+
+	private void setRoot(Root root){
+		this.root = root;
+		this.dictionary = walker.getInBreadth(root);
 	}
 }
