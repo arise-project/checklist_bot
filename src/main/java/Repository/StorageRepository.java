@@ -1,4 +1,4 @@
-package Controller;
+package Repository;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import Algorithm.Interface.ITreeWalker;
-import Controller.Interface.IStorageController;
+import Repository.Interface.IStorageService;
 import Domain.Node;
 import Domain.NodeAttribute;
 import Domain.Root;
@@ -15,7 +15,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.google.inject.Inject;
 
-public class StorageController implements IStorageController {
+public class StorageService implements IStorageService {
 	private Domain.Root root = new Root();
 	Map<Integer,Node> dictionary = new HashMap<>();
 
@@ -23,7 +23,7 @@ public class StorageController implements IStorageController {
 	private String storageFile;
 
 	@Inject
-	public StorageController(ITreeWalker walker){
+	public StorageService(ITreeWalker walker){
 		this.walker = walker;
 		root.setName("Post AI Book");
 	}

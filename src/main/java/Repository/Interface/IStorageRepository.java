@@ -1,9 +1,9 @@
-package Controller.Interface;
+package Repository.Interface;
 
 import Domain.NodeAttribute;
 import Domain.Root;
 
-public interface IStorageController {
+public interface IStorageService {
     void save(String filePath);
 
     Root open(String filePath);
