@@ -116,6 +116,6 @@ public class StorageRepository implements IStorageRepository {
 
 	private void setRoot(Root root){
 		this.root = root;
-		this.dictionary = walker.getInBreadth(root);
+		dictionary = walker.getInBreadth(root);
 	}
 }

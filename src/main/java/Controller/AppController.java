@@ -61,6 +61,7 @@ public class AppController implements IAppController {
 					command = new SaveStorageCommand();
 					command.setAttributes(Arrays.copyOfRange(args, argIndex + 1, argIndex + 2));
 					argIndex++;
+					break;
                 case "set_battr":
                     System.out.println("set_battr: " + args[argIndex + 1]);
 					command = new SetBAttrCommand();
