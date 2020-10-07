@@ -21,7 +21,7 @@ public class ResetAttrCommandHandler implements IStorageCommandHandler<ResetAttr
             NodeAttribute a = new NodeAttribute();
             a.setName(resetAttrCommand.getName());
             a.setBValue(null);
-            storage.addAttribute(resetAttrCommand.getName(), a);
+            storage.addAttribute(resetAttrCommand.getNodeName(), a);
         }
     }
 

@@ -13,10 +13,9 @@ public class TreeWalker implements ITreeWalker {
 	public Node search(Root root, String nodeName){
 		Queue<Node> nodes = new LinkedList<>();
 		nodes.add(root);
-
 		while(nodes.size() > 0){
 			Node current = nodes.poll();
-			if(current.getName() == nodeName){
+			if(nodeName.equals(current.getName())){
 				return current;
 			}
 			
@@ -25,9 +24,9 @@ public class TreeWalker implements ITreeWalker {
 				ArrayList<Node> c = p.getNodes();
 				
 				for(Node n : c){
-					if(n.getName() == nodeName){
+					if(nodeName.equals(n.getName())){
 						return n;
-					}			
+					}
 
 					nodes.add(n);
 				}

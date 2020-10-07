@@ -21,7 +21,7 @@ public class SetBAttrCommandHandler implements IStorageCommandHandler<SetBAttrCo
             NodeAttribute a = new NodeAttribute();
             a.setName(resetAttrCommand.getName());
             a.setBValue(true);
-            storage.addAttribute(resetAttrCommand.getName(), a);
+            storage.addAttribute(resetAttrCommand.getNodeName(), a);
         }
     }
 

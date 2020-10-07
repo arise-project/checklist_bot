@@ -6,6 +6,6 @@ https://services.gradle.org/distributions/
 
 source /etc/profile.d/gradle.sh
 
-gradle run --args="read_text_file 'English for Career Development' /home/eugene/Documents/English_for_Career_Development set_battr NOTE_692302932 save_storage /home/eugene/Documents/text.json statistics"
+gradle run --args="read_text_file 'English for Career Development' /home/eugene/Documents/English_for_Career_Development set_battr NOTE_692302932 attr1 save_storage /home/eugene/Documents/text.json statistics"
     
 
