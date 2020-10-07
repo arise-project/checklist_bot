@@ -1,4 +1,4 @@
-// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) Artificial Renaissance itself. All rights reserved.
 // Licensed under the MIT License.
 
 const path = require('path');
@@ -15,7 +15,7 @@ const restify = require('restify');
 const { BotFrameworkAdapter } = require('botbuilder');
 
 // This bot's main dialog.
-const { EchoBot } = require('./bot');
+const { ChecklistBot } = require('./bot');
 
 // Create HTTP server
 const server = restify.createServer();
@@ -56,7 +56,7 @@ const onTurnErrorHandler = async (context, error) => {
 adapter.onTurnError = onTurnErrorHandler;
 
 // Create the main dialog.
-const myBot = new EchoBot();
+const myBot = new ChecklistBot();
 
 // Listen for incoming requests.
 server.post('/api/messages', (req, res) => {
