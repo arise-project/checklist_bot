@@ -21,12 +21,6 @@ public class BasicModule extends AbstractModule {
 
     @Override
     protected void configure() {
-        bind(IAppController.class).to(AppController.class);
-        bind(IStorageRepository.class).to(StorageRepository.class).asEagerSingleton();
-        bind(ITextService.class).to(TextService.class);
-        bind(ITreeWalker.class).to(TreeWalker.class);
-        bind(IParagraphTextParser.class).to(ParagraphTextParser.class);
-
         bind(new TypeLiteral<IStorageCommandHandler<OpenStorageCommand>>() {}).to(OpenStorageCommandHandler.class);
         bind(new TypeLiteral<IStorageCommandHandler<ReadTextFileCommand>>() {}).to(ReadTextFileCommandHandler.class);
         bind(new TypeLiteral<IStorageCommandHandler<ResetAttrCommand>>() {}).to(ResetAttrCommandHandler.class);
@@ -35,5 +29,11 @@ public class BasicModule extends AbstractModule {
         bind(new TypeLiteral<IStorageCommandHandler<StatisticsCommand>>() {}).to(StatisticsCommandHandler.class);
 
         bind(IStorageCommandBus.class).to(StorageCommandBus.class);
+
+        bind(IAppController.class).to(AppController.class);
+        bind(IStorageRepository.class).to(StorageRepository.class).asEagerSingleton();
+        bind(ITextService.class).to(TextService.class);
+        bind(ITreeWalker.class).to(TreeWalker.class);
+        bind(IParagraphTextParser.class).to(ParagraphTextParser.class);
     }
 }

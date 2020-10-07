@@ -1,7 +1,5 @@
 package Domain;
 
-import Domain.Node;
-
 import java.util.ArrayList;
 
 public class Paragraph extends Node {

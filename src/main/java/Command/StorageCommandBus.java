@@ -3,6 +3,7 @@ package Command;
 import Command.Handler.Interface.IStorageCommandHandler;
 import Command.Interface.IStorageCommand;
 import Command.Interface.IStorageCommandBus;
+import com.google.inject.Inject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,6 +11,7 @@ import java.util.Map;
 public class StorageCommandBus implements IStorageCommandBus {
     private final Map<StorageCommandType, IStorageCommandHandler<IStorageCommand>> dictionary = new HashMap<>();
 
+    @Inject
     public StorageCommandBus(
             IStorageCommandHandler<OpenStorageCommand> openStorageCommandHandler,
             IStorageCommandHandler<ReadTextFileCommand> readTextFileCommandHandler,

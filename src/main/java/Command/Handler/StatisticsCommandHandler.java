@@ -4,10 +4,12 @@ import Command.Handler.Interface.IStorageCommandHandler;
 import Command.StatisticsCommand;
 import Command.StorageCommandType;
 import Repository.Interface.IStorageRepository;
+import com.google.inject.Inject;
 
 public class StatisticsCommandHandler implements IStorageCommandHandler<StatisticsCommand> {
     private final IStorageRepository storage;
 
+    @Inject
     public StatisticsCommandHandler(IStorageRepository storage){
         this.storage = storage;
     }

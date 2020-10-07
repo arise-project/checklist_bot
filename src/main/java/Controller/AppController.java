@@ -6,7 +6,6 @@ import Command.Interface.IStorageCommandBus;
 import Controller.Interface.IAppController;
 import Repository.Interface.IStorageRepository;
 import Service.Interface.ITextService;
-import Domain.NodeAttribute;
 import Domain.Note;
 import Domain.Paragraph;
 import com.google.inject.Inject;
@@ -45,7 +44,7 @@ public class AppController implements IAppController {
                 case "read_text_file":
                     System.out.println("read_text_file: " + args[argIndex + 2] + " name: " + args[argIndex + 1]);
 					command = new ReadTextFileCommand();
-					command.setAttributes(Arrays.copyOfRange(args, argIndex + 1, argIndex + 2));
+					command.setAttributes(Arrays.copyOfRange(args, argIndex + 1, argIndex + 3));
                     argIndex += 2;
                     break;
                 case "statistics":
@@ -54,24 +53,24 @@ public class AppController implements IAppController {
                 case "open_storage":
                     System.out.println("open_storage: " + args[argIndex + 1]);
 					command = new OpenStorageCommand();
-					command.setAttributes(Arrays.copyOfRange(args, argIndex + 1, argIndex + 1));
+					command.setAttributes(Arrays.copyOfRange(args, argIndex + 1, argIndex + 2));
                     argIndex++;
                     break;
                 case "save_storage":
                     System.out.println("save_storage: " + args[argIndex + 1]);
 					command = new SaveStorageCommand();
-					command.setAttributes(Arrays.copyOfRange(args, argIndex + 1, argIndex + 1));
+					command.setAttributes(Arrays.copyOfRange(args, argIndex + 1, argIndex + 2));
 					argIndex++;
                 case "set_battr":
                     System.out.println("set_battr: " + args[argIndex + 1]);
 					command = new SetBAttrCommand();
-					command.setAttributes(Arrays.copyOfRange(args, argIndex + 1, argIndex + 1));
+					command.setAttributes(Arrays.copyOfRange(args, argIndex + 1, argIndex + 2));
 					argIndex++;
                     break;
                 case "reset_attr":
                     System.out.println("reset_attr: " + args[argIndex + 1]);
 					command = new ResetAttrCommand();
-					command.setAttributes(Arrays.copyOfRange(args, argIndex + 1, argIndex + 1));
+					command.setAttributes(Arrays.copyOfRange(args, argIndex + 1, argIndex + 2));
 					argIndex++;
                     break;
             }

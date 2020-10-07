@@ -5,10 +5,12 @@ import Command.SetBAttrCommand;
 import Command.StorageCommandType;
 import Domain.NodeAttribute;
 import Repository.Interface.IStorageRepository;
+import com.google.inject.Inject;
 
 public class SetBAttrCommandHandler implements IStorageCommandHandler<SetBAttrCommand> {
     private final IStorageRepository storage;
 
+    @Inject
     public SetBAttrCommandHandler(IStorageRepository storage){
         this.storage = storage;
     }

@@ -5,10 +5,12 @@ import Command.ResetAttrCommand;
 import Command.StorageCommandType;
 import Domain.NodeAttribute;
 import Repository.Interface.IStorageRepository;
+import com.google.inject.Inject;
 
 public class ResetAttrCommandHandler implements IStorageCommandHandler<ResetAttrCommand> {
     private final IStorageRepository storage;
 
+    @Inject
     public ResetAttrCommandHandler(IStorageRepository storage){
         this.storage = storage;
     }
