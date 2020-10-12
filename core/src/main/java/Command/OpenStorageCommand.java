@@ -9,10 +9,6 @@ public class OpenStorageCommand implements IStorageCommand {
         return fileName;
     }
 
-    public void setFileName(String fileName){
-        this.fileName = fileName;
-    }
-
     @Override
     public StorageCommandType getType() {
         return StorageCommandType.OpenStorage;

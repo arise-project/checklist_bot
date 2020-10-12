@@ -4,19 +4,15 @@ import Command.*;
 import Command.Interface.IStorageCommand;
 import Command.Interface.IStorageCommandBus;
 import Controller.Interface.IAppController;
-import Repository.Interface.IStorageRepository;
-import Service.Interface.ITextService;
-import Domain.Note;
-import Domain.Paragraph;
 import com.google.inject.Inject;
 
 import java.util.Arrays;
 
 public class AppController implements IAppController {
-    private IStorageCommandBus storageCommandBus;
+    private final IStorageCommandBus storageCommandBus;
 
     @Inject
-    public AppController(ITextService text, IStorageRepository storage, IStorageCommandBus storageCommandBus) {
+    public AppController(IStorageCommandBus storageCommandBus) {
         this.storageCommandBus = storageCommandBus;
     }
 
@@ -84,27 +80,5 @@ public class AppController implements IAppController {
 				System.out.println(commandName + ": NOT FOUND");
 			}
         }
-    }
-
-    @Override
-    public void addRootParagraph() {
-        Paragraph p;
-    }
-
-    @Override
-    public void addRootNote() {
-        Note note;
-    }
-
-    @Override
-    public void addParagraph() {
-        Paragraph r;
-        Paragraph p;
-    }
-
-    @Override
-    public void addNote() {
-        Paragraph r;
-        Note note;
     }
 }

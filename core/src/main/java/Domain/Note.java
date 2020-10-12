@@ -1,7 +1,7 @@
 package Domain;
 
 public class Note extends Node {
-	protected String Text;
+	private String Text;
 
 	public String getText(){
 		return Text;
@@ -17,16 +17,20 @@ public class Note extends Node {
 			return false;
 		}
 
+		if (getClass() != obj.getClass()){
+			return false;
+		}
+
 		Note other = (Note)obj;
 	
-		return Name.equals(other.getName()) && Text.equals(other.getText());
+		return getName().equals(other.getName()) && Text.equals(other.getText());
 	}
 	
 	@Override
 	public int hashCode() {
 		int result = 17;
-		if(Name != null){
-			result = 31 * result + Name.hashCode();
+		if(getName() != null){
+			result = 31 * result + getName().hashCode();
 		}
 
 		if(Text != null){

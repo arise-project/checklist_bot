@@ -53,9 +53,7 @@ public class TreeWalker implements ITreeWalker {
 				Paragraph p = (Paragraph)current;
 				ArrayList<Node> c = p.getNodes();
 
-				for(Node n : c){
-					nodes.add(n);
-				}
+				nodes.addAll(c);
 			}
 		}
 

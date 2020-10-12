@@ -18,12 +18,13 @@ public class ParagraphTextParser implements IParagraphTextParser {
 		ArrayList<Node> notes = new ArrayList<>();
 
 		File file = new File(filePath);
-		BufferedReader reader = null;
+		BufferedReader reader;
 		try{
 			reader = new BufferedReader(new FileReader(file));
 		}
 		catch(FileNotFoundException e){
 			e.printStackTrace();
+			return notes;
 		}
 
 		String st = null;
@@ -40,26 +41,24 @@ public class ParagraphTextParser implements IParagraphTextParser {
 				e.printStackTrace();
 			}
 			
-			if(st == null){
-				break;
-			}
-			
-			if(st.trim().length() == 0)
-			{
-				if(count > 0)
+			if(st != null){
+				if(st.trim().length() == 0)
 				{
-					node.setText(sb.toString());
-					node.setName("NOTE_"+ node.hashCode());
-					notes.add(node);
-					node = new Note();
-					sb = new StringBuilder();
-					count = 0;
-					index++;				
+					if(count > 0)
+					{
+						node.setText(sb.toString());
+						node.setName("NOTE_"+ node.hashCode());
+						notes.add(node);
+						node = new Note();
+						sb = new StringBuilder();
+						count = 0;
+						index++;
+					}
 				}
-			}
-			else {
-				sb.append(st);
-				count++;
+				else {
+					sb.append(st);
+					count++;
+				}
 			}
 		}
 		while(st != null);

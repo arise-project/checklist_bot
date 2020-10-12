@@ -3,7 +3,7 @@ package Domain;
 import java.util.ArrayList;
 
 public class Paragraph extends Node {
-	protected ArrayList<Node> Nodes;
+	private ArrayList<Node> Nodes;
 	
 	public Paragraph(){
 		Nodes = new ArrayList<>();

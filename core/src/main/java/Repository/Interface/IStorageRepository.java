@@ -1,7 +1,10 @@
 package Repository.Interface;
 
+import Domain.Node;
 import Domain.NodeAttribute;
 import Domain.Root;
+
+import java.util.Map;
 
 public interface IStorageRepository {
     void save(String filePath);
@@ -13,4 +16,6 @@ public interface IStorageRepository {
     Root getRoot();
 
     String getStorageFile();
+
+    Map<Integer, Node> getNodes();
 }

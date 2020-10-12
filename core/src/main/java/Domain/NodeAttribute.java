@@ -1,7 +1,7 @@
 package Domain;
 
 public class NodeAttribute {
-	protected String Name;
+	private String Name;
 
 	public String getName(){
 		return Name;
@@ -11,7 +11,7 @@ public class NodeAttribute {
 		Name = name;
 	}
 
-	protected Boolean BValue;
+	private Boolean BValue;
 	
 	public Boolean getBValue(){
 		return BValue;
@@ -24,6 +24,10 @@ public class NodeAttribute {
 	@Override
 	public boolean equals(Object obj){
 		if(obj == null){
+			return false;
+		}
+
+		if (getClass() != obj.getClass()){
 			return false;
 		}
 

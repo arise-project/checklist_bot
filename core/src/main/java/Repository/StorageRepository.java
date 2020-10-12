@@ -17,7 +17,7 @@ import com.google.inject.Inject;
 
 public class StorageRepository implements IStorageRepository {
 	private Domain.Root root = new Root();
-	Map<Integer,Node> dictionary = new HashMap<>();
+	private Map<Integer,Node> dictionary = new HashMap<>();
 
 	private final ITreeWalker walker;
 	private String storageFile;
@@ -37,7 +37,6 @@ public class StorageRepository implements IStorageRepository {
 		}
 
 		ObjectMapper mapper =  new ObjectMapper();
-		mapper.enableDefaultTyping();
 		mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
 		FileWriter writer = null;
 		try
@@ -89,7 +88,7 @@ public class StorageRepository implements IStorageRepository {
 		}
 
 		for(NodeAttribute a : result.getAttributes()){
-			if(a.getName() == attribute.getName()){
+			if(a.getName().equals(attribute.getName())){
 				a.setBValue(attribute.getBValue());
 				System.out.println(nodeName + " updated attribute "+ attribute.getName() + " value "+ attribute.getBValue());
 				return;
@@ -112,6 +111,11 @@ public class StorageRepository implements IStorageRepository {
 			return "IN_MEMORY";
 		}
 		return storageFile;
+	}
+
+	@Override
+	public Map<Integer, Node> getNodes() {
+		return dictionary;
 	}
 
 	private void setRoot(Root root){

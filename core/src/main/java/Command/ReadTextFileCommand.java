@@ -9,18 +9,10 @@ public class ReadTextFileCommand implements IStorageCommand {
         return fileName;
     }
 
-    public void setFileName(String fileName){
-        this.fileName = fileName;
-    }
-
     private String name;
 
     public String getName(){
         return name;
-    }
-
-    public void setName(String name){
-        this.name = name;
     }
 
     @Override

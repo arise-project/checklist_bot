@@ -6,15 +6,14 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 
 @JsonTypeInfo(
 	use = JsonTypeInfo.Id.NAME,
-	include = JsonTypeInfo.As.PROPERTY,
-	property = "type"
+		property = "type"
 )
 @JsonSubTypes({
 	@JsonSubTypes.Type( value = Note.class, name = "note" ),
 	@JsonSubTypes.Type( value = Paragraph.class, name = "paragraph" )
 })
 public class Node {
-	protected String Name;
+	private String Name;
 
 	public String getName(){
 		return Name;
@@ -24,7 +23,7 @@ public class Node {
 		Name = name;
 	}
 
-	protected ArrayList<NodeAttribute> Attributes;
+	private final ArrayList<NodeAttribute> Attributes;
 		
 	public Node(){
 		Attributes = new ArrayList<>();
@@ -33,14 +32,14 @@ public class Node {
 	public ArrayList<NodeAttribute> getAttributes(){
 		return Attributes;
 	}
-	
-	public void setAttributes(ArrayList<NodeAttribute> attributes){
-		Attributes = attributes;
-	}
 
 	@Override
 	public boolean equals(Object obj){
 		if(obj == null){
+			return false;
+		}
+
+		if (getClass() != obj.getClass()){
 			return false;
 		}
 
