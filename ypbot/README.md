@@ -1,3 +1,6 @@
+npm install -g localtunnel # may need sudo access lt --port 5000
+
+
 # ypbot
 
 Demonstrate the core capabilities of the Microsoft Bot Framework
