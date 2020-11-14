@@ -11,6 +11,16 @@ public class Note extends Node {
 		Text = text;
 	}
 
+	private int [] TextSignature;
+
+	public int [] getTextSignature(){
+		return TextSignature;
+	}
+
+	public void setTextSignature(int [] textSignature){
+		TextSignature = textSignature;
+	}
+
 	@Override
 	public boolean equals(Object obj){
 		if(obj == null){

@@ -27,8 +27,7 @@ dependencies {
     compile 'com.fasterxml.jackson.core:jackson-annotations:2.10.2'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.10.2'
     compile 'com.google.inject:guice:4.2.3'
-    compile 'info.debatty:java-string-similarity:2.0.0'
-
+    compile 'info.debatty:java-lsh:0.12'
     // Use JUnit test framework
     testCompile 'junit:junit:4.12'
 }
