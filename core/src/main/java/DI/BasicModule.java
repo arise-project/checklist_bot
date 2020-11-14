@@ -1,6 +1,8 @@
 package DI;
 
+import Algorithm.Interface.ITreeMerger;
 import Algorithm.Interface.ITreeWalker;
+import Algorithm.TreeMerger;
 import Algorithm.TreeWalker;
 import Command.*;
 import Command.Handler.*;
@@ -34,6 +36,7 @@ public class BasicModule extends AbstractModule {
         bind(IStorageRepository.class).to(StorageRepository.class).asEagerSingleton();
         bind(ITextService.class).to(TextService.class);
         bind(ITreeWalker.class).to(TreeWalker.class);
+        bind(ITreeMerger.class).to(TreeMerger.class);
         bind(IParagraphTextParser.class).to(ParagraphTextParser.class);
     }
 }
