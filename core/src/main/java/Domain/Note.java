@@ -1,7 +1,13 @@
 package Domain;
 
+import java.util.ArrayList;
+
 public class Note extends Node {
 	private String Text;
+
+	public Note() {
+		textHistory = new ArrayList<>();
+	}
 
 	public String getText(){
 		return Text;
@@ -19,6 +25,12 @@ public class Note extends Node {
 
 	public void setTextSignature(int [] textSignature){
 		TextSignature = textSignature;
+	}
+
+	private final ArrayList<String> textHistory;
+
+	public ArrayList<String> getTextHistory(){
+		return textHistory;
 	}
 
 	@Override

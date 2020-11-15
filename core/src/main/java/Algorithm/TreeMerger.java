@@ -53,8 +53,9 @@ public class TreeMerger implements ITreeMerger {
         }
 
         Map<Integer, MergeType> diff = new HashMap<>();
+        Map<Integer, Integer> replace = new HashMap<>();
         MinHash minhash = new MinHash(0.1, 5);
-        for(var sigKey1: oldSignatures.keySet()){
+        for(var sigKey1: oldSignatures.keySet()) {
             double maxSimilarity = Double.MIN_VALUE;
             int similarNew = -1;
             for(var sigKey2: newSignatures.keySet()) {
@@ -64,8 +65,9 @@ public class TreeMerger implements ITreeMerger {
                     similarNew = sigKey2;
                 }
             }
-            if(maxSimilarity > 0.9){
+            if(maxSimilarity > 0.9) {
                 diff.put(similarNew, MergeType.Replace);
+                replace.put(similarNew, sigKey1);
             }
             else {
                 diff.put(sigKey1, MergeType.Delete);
@@ -90,7 +92,7 @@ public class TreeMerger implements ITreeMerger {
             }
         }
 
-        for (var newN: oldNotes.values()) {
+        for (var newN: newNotes.values()) {
             if(diff.containsKey(newN.hashCode())){
                 if(diff.get(newN.hashCode()) == MergeType.Insert){
                     var insertedNote = new MergeNote();
@@ -101,6 +103,7 @@ public class TreeMerger implements ITreeMerger {
                     var replaceNote = new MergeNote();
                     replaceNote.setNote((Note)newN);
                     replaceNote.setMergeType(MergeType.Replace);
+                    replaceNote.setOldNote((Note)oldNotes.get(replace.get(newN.hashCode())));
                     diffNotes.add(replaceNote);
                 }
             }
@@ -111,6 +114,21 @@ public class TreeMerger implements ITreeMerger {
 
     @Override
     public Root merge(Root oldTree, Root newTree) {
+        ArrayList<MergeNote> diff = getDifference(oldTree,newTree);
+        for (var change: diff) {
+            switch (change.getMergeType()) {
+                case Delete:
+                    change.getNote().setDeleted(true);
+                    break;
+                case Insert:
+                    oldTree.getNodes().add(change.getNote());
+                    break;
+                case Replace:
+                    change.getOldNote().getTextHistory().add(change.getOldNote().getText());
+                    change.getOldNote().setText(change.getNote().getText());
+                    break;
+            }
+        }
         return null;
     }
 }

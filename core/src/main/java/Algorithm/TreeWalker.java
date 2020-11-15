@@ -15,11 +15,11 @@ public class TreeWalker implements ITreeWalker {
 		nodes.add(root);
 		while(nodes.size() > 0){
 			Node current = nodes.poll();
-			if(nodeName.equals(current.getName())){
+			if(nodeName.equals(current.getName())) {
 				return current;
 			}
 			
-			if(current instanceof Paragraph){
+			if(current instanceof Paragraph) {
 				Paragraph p = (Paragraph)current;
 				ArrayList<Node> c = p.getNodes();
 				
@@ -43,13 +43,12 @@ public class TreeWalker implements ITreeWalker {
 
 		while(nodes.size() > 0){
 			Node current = nodes.poll();
-			if(!result.containsKey(current.hashCode()))
-			{
+			if(!result.containsKey(current.hashCode())) {
 				//todo: tree may contain duplicates after ParagraphTextParser
 				result.put(current.hashCode(), current);
 			}
 
-			if(current instanceof Paragraph){
+			if(current instanceof Paragraph) {
 				Paragraph p = (Paragraph)current;
 				ArrayList<Node> c = p.getNodes();
 

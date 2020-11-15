@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 	@JsonSubTypes.Type( value = Note.class, name = "note" ),
 	@JsonSubTypes.Type( value = Paragraph.class, name = "paragraph" )
 })
-public class Node {
+public abstract class Node {
 	private String Name;
 
 	public String getName(){
@@ -31,6 +31,16 @@ public class Node {
 	
 	public ArrayList<NodeAttribute> getAttributes(){
 		return Attributes;
+	}
+
+	private boolean Deleted;
+
+	public boolean getleted(){
+		return Deleted;
+	}
+
+	public void setDeleted(boolean deleted){
+		Deleted = deleted;
 	}
 
 	@Override

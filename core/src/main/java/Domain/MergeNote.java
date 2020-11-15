@@ -12,6 +12,16 @@ public class MergeNote {
         this.note = note;
     }
 
+    private Note oldNote;
+
+    public Note getOldNote(){
+        return oldNote;
+    }
+
+    public void setOldNote(Note note) {
+        this.oldNote = oldNote;
+    }
+
     private MergeType mergeType;
 
     public MergeType getMergeType(){
