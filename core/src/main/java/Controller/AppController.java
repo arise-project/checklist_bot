@@ -4,6 +4,7 @@ import Command.*;
 import Command.Interface.IStorageCommand;
 import Command.Interface.IStorageCommandBus;
 import Controller.Interface.IAppController;
+import Domain.Root;
 import com.google.inject.Inject;
 
 import java.util.Arrays;
@@ -30,8 +31,10 @@ public class AppController implements IAppController {
             System.out.println("reset_attr [node_name] #reset named attribute.");
             System.out.println();
             System.out.println("Commands works in sequence: command1 [parameter] command2 [parameter1] [parameter2] command3");
+            return;
         }
 
+        Root root = new Root();
         int argIndex = 0;
         while (argIndex < args.length) {
             IStorageCommand command = null;
@@ -74,6 +77,7 @@ public class AppController implements IAppController {
             argIndex++;
 
             if(command != null){
+                command.setRoot(root);
 				storageCommandBus.Dispatch(command);
 			}
             else {

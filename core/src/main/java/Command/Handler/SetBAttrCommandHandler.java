@@ -16,12 +16,12 @@ public class SetBAttrCommandHandler implements IStorageCommandHandler<SetBAttrCo
     }
 
     @Override
-    public void handle(SetBAttrCommand resetAttrCommand) {
-        if(storage.getRoot() != null) {
+    public void handle(SetBAttrCommand setBAttrCommand) {
+        if(setBAttrCommand.getRoot() != null) {
             NodeAttribute a = new NodeAttribute();
-            a.setName(resetAttrCommand.getName());
+            a.setName(setBAttrCommand.getName());
             a.setBValue(true);
-            storage.addAttribute(resetAttrCommand.getNodeName(), a);
+            storage.addAttribute(setBAttrCommand.getNodeName(), a, setBAttrCommand.getRoot());
         }
     }
 

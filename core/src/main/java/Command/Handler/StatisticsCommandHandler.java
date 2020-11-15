@@ -20,8 +20,8 @@ public class StatisticsCommandHandler implements IStorageCommandHandler<Statisti
     @Override
     public void handle(StatisticsCommand statisticsCommand) {
         System.out.println("statistics: " + storage.getStorageFile());
-        if(storage.getRoot() != null) {
-            System.out.println("Tree size: " + walker.getInBreadth(storage.getRoot()).size());
+        if(statisticsCommand.getRoot() != null) {
+            System.out.println("Tree size: " + walker.getInBreadth(statisticsCommand.getRoot()).size());
         }
         else {
             System.out.println("Storage is EMPTY");

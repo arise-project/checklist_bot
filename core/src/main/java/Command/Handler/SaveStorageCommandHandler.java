@@ -16,8 +16,8 @@ public class SaveStorageCommandHandler implements IStorageCommandHandler<SaveSto
 
     @Override
     public void handle(SaveStorageCommand saveStorageCommand) {
-        if(storage.getRoot() != null) {
-            storage.save(saveStorageCommand.getFileName());
+        if(saveStorageCommand.getRoot() != null) {
+            storage.save(saveStorageCommand.getFileName(), saveStorageCommand.getRoot());
         }
     }
 

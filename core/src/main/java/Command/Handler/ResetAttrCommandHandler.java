@@ -17,11 +17,11 @@ public class ResetAttrCommandHandler implements IStorageCommandHandler<ResetAttr
 
     @Override
     public void handle(ResetAttrCommand resetAttrCommand) {
-        if(storage.getRoot() != null) {
+        if(resetAttrCommand.getRoot() != null) {
             NodeAttribute a = new NodeAttribute();
             a.setName(resetAttrCommand.getName());
             a.setBValue(null);
-            storage.addAttribute(resetAttrCommand.getNodeName(), a);
+            storage.addAttribute(resetAttrCommand.getNodeName(), a, resetAttrCommand.getRoot());
         }
     }
 

@@ -1,6 +1,7 @@
 package Command;
 
 import Command.Interface.IStorageCommand;
+import Domain.Root;
 
 public class ReadTextFileCommand implements IStorageCommand {
     private String fileName;
@@ -13,6 +14,16 @@ public class ReadTextFileCommand implements IStorageCommand {
 
     public String getName(){
         return name;
+    }
+
+    private Root root;
+
+    public Root getRoot(){
+        return root;
+    }
+
+    public void setRoot(Root root){
+        this.root = root;
     }
 
     @Override

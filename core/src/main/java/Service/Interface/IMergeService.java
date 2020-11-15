@@ -1,2 +1,9 @@
-package Service.Interface;public interface IMergeService {
+package Service.Interface;
+
+import Domain.MergeNote;
+
+import java.util.ArrayList;
+
+public interface IMergeService {
+    void printDiff(ArrayList<MergeNote> diff);
 }

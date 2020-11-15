@@ -1,21 +1,14 @@
 package Repository.Interface;
 
-import Domain.Node;
 import Domain.NodeAttribute;
 import Domain.Root;
 
-import java.util.Map;
-
 public interface IStorageRepository {
-    void save(String filePath);
+    void save(String filePath, Root root);
 
-    void open(String filePath);
+    Root open(String filePath);
 
-    void addAttribute(String nodeName, NodeAttribute attribute);
-
-    Root getRoot();
+    void addAttribute(String nodeName, NodeAttribute attribute, Root root);
 
     String getStorageFile();
-
-    Map<Integer, Node> getNodes();
 }

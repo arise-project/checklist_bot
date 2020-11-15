@@ -3,8 +3,6 @@ package Repository;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 import Algorithm.Interface.ITreeWalker;
 import Repository.Interface.IStorageRepository;
@@ -16,20 +14,16 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.google.inject.Inject;
 
 public class StorageRepository implements IStorageRepository {
-	private Domain.Root root = new Root();
-	private Map<Integer,Node> dictionary = new HashMap<>();
-
 	private final ITreeWalker walker;
 	private String storageFile;
 
 	@Inject
 	public StorageRepository(ITreeWalker walker){
 		this.walker = walker;
-		root.setName("Post AI Book");
 	}
 
 	@Override
-	public void save(String filePath){
+	public void save(String filePath, Root root){
 		if(root == null)
 		{
 			System.out.println("Can not save empty storage to "+ filePath);
@@ -65,23 +59,25 @@ public class StorageRepository implements IStorageRepository {
 	}
 	
 	@Override
-	public void open(String filePath){
+	public Root open(String filePath){
 		ObjectMapper mapper =  new ObjectMapper();
 
 		try {
 			File file = new File(filePath);	
 			Root root = mapper.readValue(file, Root.class);
-			setRoot(root);
 			storageFile = filePath;
+			return root;
 		}
 		catch(IOException e){
 			e.printStackTrace();
 		}
+
+		return null;
 	}
 
 	@Override
-	public void addAttribute(String nodeName, NodeAttribute attribute)  {
-		Node result = walker.search(this.root, nodeName);
+	public void addAttribute(String nodeName, NodeAttribute attribute, Root root)  {
+		Node result = walker.search(root, nodeName);
 		if(result == null) {
 			System.out.println(nodeName + " not found ");
 			return;
@@ -101,25 +97,10 @@ public class StorageRepository implements IStorageRepository {
 	}
 
 	@Override
-	public Root getRoot(){
-		return this.root;
-	}
-
-	@Override
 	public String getStorageFile(){
 		if(storageFile == null){
 			return "IN_MEMORY";
 		}
 		return storageFile;
-	}
-
-	@Override
-	public Map<Integer, Node> getNodes() {
-		return dictionary;
-	}
-
-	private void setRoot(Root root){
-		this.root = root;
-		dictionary = walker.getInBreadth(root);
 	}
 }

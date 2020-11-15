@@ -11,8 +11,10 @@ import Command.Interface.IStorageCommandBus;
 import Controller.AppController;
 import Controller.Interface.IAppController;
 import Repository.Interface.IStorageRepository;
+import Service.Interface.IMergeService;
 import Service.Interface.ITextService;
 import Repository.StorageRepository;
+import Service.Interface.MergeService;
 import Service.TextService;
 import Parser.Interface.IParagraphTextParser;
 import Parser.ParagraphTextParser;
@@ -38,5 +40,6 @@ public class BasicModule extends AbstractModule {
         bind(ITreeWalker.class).to(TreeWalker.class);
         bind(ITreeMerger.class).to(TreeMerger.class);
         bind(IParagraphTextParser.class).to(ParagraphTextParser.class);
+        bind(IMergeService.class).to(MergeService.class);
     }
 }

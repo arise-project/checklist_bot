@@ -1,6 +1,7 @@
 package Command;
 
 import Command.Interface.IStorageCommand;
+import Domain.Root;
 
 public class ResetAttrCommand implements IStorageCommand {
     private String name;
@@ -13,6 +14,16 @@ public class ResetAttrCommand implements IStorageCommand {
 
     public String getNodeName(){
         return nodeName;
+    }
+
+    private Root root;
+
+    public Root getRoot(){
+        return root;
+    }
+
+    public void setRoot(Root root){
+        this.root = root;
     }
 
     @Override

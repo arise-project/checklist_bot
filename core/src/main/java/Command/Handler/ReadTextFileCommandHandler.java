@@ -19,8 +19,8 @@ public class ReadTextFileCommandHandler implements IStorageCommandHandler<ReadTe
 
     @Override
     public void handle(ReadTextFileCommand readTextFileCommand) {
-        storage.getRoot().setName(readTextFileCommand.getName());
-        text.parseTextFile(storage.getRoot(), readTextFileCommand.getFileName());
+        readTextFileCommand.getRoot().setName(readTextFileCommand.getName());
+        text.parseTextFile(readTextFileCommand.getRoot(), readTextFileCommand.getFileName());
     }
 
     @Override
