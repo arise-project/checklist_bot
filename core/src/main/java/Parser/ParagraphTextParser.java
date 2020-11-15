@@ -1,6 +1,5 @@
 package Parser;
 
-import Algorithm.LSHStringSignature;
 import Domain.Node;
 import Domain.Note;
 import Parser.Interface.IParagraphTextParser;
@@ -33,7 +32,6 @@ public class ParagraphTextParser implements IParagraphTextParser {
 		int index = 0;
 		Note node = new Note();
 		StringBuilder sb = new StringBuilder();
-		var signature = new LSHStringSignature();
 		do{
 			try
 			{
@@ -49,7 +47,6 @@ public class ParagraphTextParser implements IParagraphTextParser {
 					if(count > 0)
 					{
 						node.setText(sb.toString());
-						node.setTextSignature(signature.getStringSignature(signature.getStringVector(node.getText())));
 						node.setName("NOTE_"+ node.hashCode());
 						notes.add(node);
 						node = new Note();

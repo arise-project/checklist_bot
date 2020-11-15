@@ -17,16 +17,6 @@ public class Note extends Node {
 		Text = text;
 	}
 
-	private int [] TextSignature;
-
-	public int [] getTextSignature(){
-		return TextSignature;
-	}
-
-	public void setTextSignature(int [] textSignature){
-		TextSignature = textSignature;
-	}
-
 	private final ArrayList<String> textHistory;
 
 	public ArrayList<String> getTextHistory(){

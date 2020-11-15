@@ -4,7 +4,7 @@ import Algorithm.Interface.ITreeMerger;
 import Algorithm.Interface.ITreeWalker;
 import Domain.*;
 import com.google.inject.Inject;
-import info.debatty.java.lsh.MinHash;
+import info.debatty.java.stringsimilarity.MetricLCS;
 
 import java.util.*;
 
@@ -30,41 +30,22 @@ public class TreeMerger implements ITreeMerger {
             }
         }
 
-        Map<Integer, int []> oldSignatures = new HashMap<>();
-        for (var old: oldNotes.values()) {
-            if (old instanceof Note)
-            {
-                Note oldNote = (Note)old;
-                int [] oldSignature = oldNote.getTextSignature();
-                oldSignatures.put(oldNote.hashCode(), oldSignature);
-            }
-        }
-
-        Map<Integer, int []> newSignatures = new HashMap<>();
-        for (var newN: newNotes.values()) {
-            if (newN instanceof Note)
-            {
-                Note newNote = (Note)newN;
-                int [] newSignature = newNote.getTextSignature();
-                newSignatures.put(newNote.hashCode(), newSignature);
-            }
-        }
-
         Map<Integer, MergeType> diff = new HashMap<>();
         Map<Integer, Integer> replace = new HashMap<>();
-        for(var sigKey1: oldSignatures.keySet()) {
-            double maxSimilarity = Double.MIN_VALUE;
+        for(var sigKey1: oldNotes.keySet()) {
+            double minSimilarity = 1;
             int similarNew = -1;
-            for(var sigKey2: newSignatures.keySet()) {
-                int dictSise = oldSignatures.get(sigKey1).length > newSignatures.get(sigKey2).length ?oldSignatures.get(sigKey1).length :newSignatures.get(sigKey2).length;
-                MinHash minhash = new MinHash(0.001, dictSise);
-                double current = minhash.similarity(oldSignatures.get(sigKey1), newSignatures.get(sigKey2));
-                if(maxSimilarity < current) {
-                    maxSimilarity = current;
+            for(var sigKey2: newNotes.keySet()) {
+                MetricLCS lcs = new MetricLCS();
+                double current = lcs.distance(
+                        ((Note)oldNotes.get(sigKey1)).getText(),
+                        ((Note)newNotes.get(sigKey2)).getText());
+                if(minSimilarity > current) {
+                    minSimilarity = current;
                     similarNew = sigKey2;
                 }
             }
-            if(maxSimilarity > 0.9) {
+            if(minSimilarity < 0.3) {
                 diff.put(similarNew, MergeType.Replace);
                 replace.put(similarNew, sigKey1);
             }
@@ -73,7 +54,7 @@ public class TreeMerger implements ITreeMerger {
             }
         }
 
-        for(var sigKey2: newSignatures.keySet()) {
+        for(var sigKey2: newNotes.keySet()) {
             if(!diff.containsKey(sigKey2)){
                 diff.put(sigKey2, MergeType.Insert);
             }
