@@ -32,8 +32,11 @@ public class ReadTextFileCommandHandler implements IStorageCommandHandler<ReadTe
         if(readTextFileCommand.getRoot().getNodes().size() > 0)
         {
             mergeService.printDiff(merger.getDifference(readTextFileCommand.getRoot(), newRoot));
+            readTextFileCommand.setRoot(merger.merge(readTextFileCommand.getRoot(), newRoot));
         }
-        readTextFileCommand.setRoot(merger.merge(readTextFileCommand.getRoot(), newRoot));
+        else{
+            readTextFileCommand.setRoot(newRoot);
+        }
     }
 
     @Override
