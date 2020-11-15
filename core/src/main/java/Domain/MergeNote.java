@@ -18,7 +18,7 @@ public class MergeNote {
         return oldNote;
     }
 
-    public void setOldNote(Note note) {
+    public void setOldNote(Note oldNote) {
         this.oldNote = oldNote;
     }
 
