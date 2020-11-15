@@ -6,10 +6,7 @@ import Domain.*;
 import com.google.inject.Inject;
 import info.debatty.java.lsh.MinHash;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class TreeMerger implements ITreeMerger {
     private final ITreeWalker walker;
@@ -22,8 +19,9 @@ public class TreeMerger implements ITreeMerger {
     @Override
     public ArrayList<MergeNote> getDifference(Root oldTree, Root newTree) {
         Map<Integer, Node> oldNotes = walker.getInBreadth(oldTree);
-        Map<Integer, Node> newNotes = walker.getInBreadth(oldTree);
-        Set<Integer> newSet = newNotes.keySet();
+        Map<Integer, Node> newNotes = walker.getInBreadth(newTree);
+        Set<Integer> newSet = new HashSet<>();
+        newSet.addAll(newNotes.keySet());
         for (var hash: newSet) {
             if(oldNotes.containsKey(hash))
             {
@@ -54,11 +52,12 @@ public class TreeMerger implements ITreeMerger {
 
         Map<Integer, MergeType> diff = new HashMap<>();
         Map<Integer, Integer> replace = new HashMap<>();
-        MinHash minhash = new MinHash(0.1, 5);
         for(var sigKey1: oldSignatures.keySet()) {
             double maxSimilarity = Double.MIN_VALUE;
             int similarNew = -1;
             for(var sigKey2: newSignatures.keySet()) {
+                int dictSise = oldSignatures.get(sigKey1).length > newSignatures.get(sigKey2).length ?oldSignatures.get(sigKey1).length :newSignatures.get(sigKey2).length;
+                MinHash minhash = new MinHash(0.001, dictSise);
                 double current = minhash.similarity(oldSignatures.get(sigKey1), newSignatures.get(sigKey2));
                 if(maxSimilarity < current) {
                     maxSimilarity = current;

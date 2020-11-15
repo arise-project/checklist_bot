@@ -28,6 +28,7 @@ public class ReadTextFileCommandHandler implements IStorageCommandHandler<ReadTe
     public void handle(ReadTextFileCommand readTextFileCommand) {
         readTextFileCommand.getRoot().setName(readTextFileCommand.getName());
         Root newRoot = new Root();
+        newRoot.setName(readTextFileCommand.getName());
         text.parseTextFile(newRoot, readTextFileCommand.getFileName());
         if(readTextFileCommand.getRoot().getNodes().size() > 0)
         {
