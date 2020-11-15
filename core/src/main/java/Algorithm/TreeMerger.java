@@ -129,6 +129,6 @@ public class TreeMerger implements ITreeMerger {
                     break;
             }
         }
-        return null;
+        return oldTree;
     }
 }

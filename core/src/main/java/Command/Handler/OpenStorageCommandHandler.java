@@ -32,7 +32,7 @@ public class OpenStorageCommandHandler implements IStorageCommandHandler<OpenSto
         {
             mergeService.printDiff(merger.getDifference(openStorageCommand.getRoot(), newRoot));
         }
-        merger.merge(openStorageCommand.getRoot(), newRoot);
+        openStorageCommand.setRoot(merger.merge(openStorageCommand.getRoot(), newRoot));
     }
 
     @Override

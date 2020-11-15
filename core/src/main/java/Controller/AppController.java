@@ -79,6 +79,7 @@ public class AppController implements IAppController {
             if(command != null){
                 command.setRoot(root);
 				storageCommandBus.Dispatch(command);
+				root = command.getRoot();
 			}
             else {
 				System.out.println(commandName + ": NOT FOUND");
