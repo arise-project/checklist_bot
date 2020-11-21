@@ -1,6 +1,6 @@
 package Domain.Drive;
 
-public class File {
+public class GFile {
     private String id;
 
 

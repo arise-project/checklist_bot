@@ -28,6 +28,12 @@ dependencies {
     compile 'com.fasterxml.jackson.core:jackson-databind:2.10.2'
     compile 'com.google.inject:guice:4.2.3'
     compile 'info.debatty:java-string-similarity:1.2.1'
+    compile 'com.google.api-client:google-api-client:1.23.0'
+    compile 'com.google.oauth-client:google-oauth-client-jetty:1.23.0'
+    compile 'com.google.apis:google-api-services-drive:v3-rev110-1.23.0'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.12.0-rc2'
+    compile 'com.fasterxml.jackson.core:jackson-core:2.12.0-rc2'
+
     // Use JUnit test framework
     testCompile 'junit:junit:4.12'
 }
