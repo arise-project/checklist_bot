@@ -26,7 +26,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class DriveService implements Service.Interface.IDriveService {
-    private static final String APPLICATION_NAME = "checklist1";
+    private static final String APPLICATION_NAME = "Google Drive API Java Quickstart";
     private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
     private static final String TOKENS_DIRECTORY_PATH = "tokens";
 
@@ -36,9 +36,6 @@ public class DriveService implements Service.Interface.IDriveService {
      */
     private static final List<String> SCOPES = Arrays.asList(
             new String[] {
-                            DriveScopes.DRIVE_FILE,
-                            DriveScopes.DRIVE,
-                            DriveScopes.DRIVE_READONLY,
                             DriveScopes.DRIVE_METADATA_READONLY
                     });
 
@@ -102,6 +99,7 @@ public class DriveService implements Service.Interface.IDriveService {
     public ArrayList<GFile> search(String pattern) throws IOException, GeneralSecurityException {
         final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
         Credential credential = getCredentials(HTTP_TRANSPORT);
+        //credential.refreshToken();
         Drive service = new Drive.Builder(HTTP_TRANSPORT, JSON_FACTORY, credential)
                 .setApplicationName(APPLICATION_NAME)
                 .build();

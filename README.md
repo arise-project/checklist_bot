@@ -14,7 +14,7 @@ gradle run --args="read_text_file 'English for Career Development' /home/eugene/
 ## Create jar
 gradle clean fatJar
 
-gradle run --args="read_text_file 'English for Career Development' /home/eugene/Documents/English_for_Career_Development read_text_file 'English for Career Development' /home/eugene/Documents/my_changes" save_storage /home/eugene/Documents/text.json
+gradle run --args="read_text_file 'English for Career Development' /home/eugene/Documents/English_for_Career_Development read_text_file 'English for Career Development' /home/eugene/Documents/my_changes save_storage /home/eugene/Documents/text.json"
 
 cd build/libs/
 
