@@ -13,17 +13,23 @@ import com.evernote.edam.type.Note;
 import com.evernote.edam.type.NoteSortOrder;
 import com.evernote.edam.type.Notebook;
 import com.evernote.thrift.TException;
-import com.evernote.thrift.transport.TTransport;
 
 import java.util.Iterator;
 import java.util.List;
 
-public class EverynoteService {
+public class EverynoteService implements Service.Interface.IEverynoteService {
     private UserStoreClient userStore;
     private NoteStoreClient noteStore;
+    private static String Token;
 
+    public void setToken(String token)
+    {
+        Token = token;
+    }
+
+    @Override
     public void auth() throws TException, EDAMSystemException, EDAMUserException {
-        EvernoteAuth evernoteAuth = new EvernoteAuth(EvernoteService.SANDBOX, "S=s1:U=9630a:E=17d4759d4cc:C=175efa8a7a8:P=1cd:A=en-devtoken:V=2:H=844051c6f2be533c8fb7d423005e560e");
+        EvernoteAuth evernoteAuth = new EvernoteAuth(EvernoteService.SANDBOX, Token);
         ClientFactory factory = new ClientFactory(evernoteAuth);
         userStore = factory.createUserStoreClient();
 
@@ -39,6 +45,7 @@ public class EverynoteService {
         noteStore = factory.createNoteStoreClient();
     }
 
+    @Override
     public void listNotes() throws Exception {
         // List the notes in the user's account
         System.out.println("Listing notes:");
@@ -61,7 +68,7 @@ public class EverynoteService {
             for (Note note : notes) {
                 System.out.println(" * " + note.getTitle());
                 Note noteDetails = noteStore.getNote(note.getGuid(), true, true, true, true);
-                System.out.println("content " + noteDetails.getContent());
+                System.out.println("content " + new TikaService().extract(noteDetails.getContent()));
             }
         }
         System.out.println();
@@ -70,6 +77,7 @@ public class EverynoteService {
     /**
      * Search a user's notes and display the results.
      */
+    @Override
     public void searchNotes() throws Exception {
         // Searches are formatted according to the Evernote search grammar.
         // Learn more at

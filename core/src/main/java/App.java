@@ -10,6 +10,7 @@ public class App {
 	public static void main(String[] args) {
         try {
             var e = new EverynoteService();
+            e.setToken("<token>");
             e.auth();
             e.listNotes();
             e.searchNotes();
