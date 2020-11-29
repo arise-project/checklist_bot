@@ -7,7 +7,6 @@ import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
 import com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets;
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
-import com.google.api.client.http.HttpResponse;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
@@ -22,7 +21,6 @@ import java.nio.charset.StandardCharsets;
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class DriveService implements Service.Interface.IDriveService {
@@ -35,9 +33,7 @@ public class DriveService implements Service.Interface.IDriveService {
      * If modifying these scopes, delete your previously saved tokens/ folder.
      */
     private static final List<String> SCOPES = Arrays.asList(
-            new String[] {
-                            DriveScopes.DRIVE_METADATA_READONLY
-                    });
+            DriveScopes.DRIVE_METADATA_READONLY);
 
     private static final String CREDENTIALS_FILE_PATH = "/credentials.json";
 
@@ -49,11 +45,13 @@ public class DriveService implements Service.Interface.IDriveService {
      */
     private static Credential getCredentials(final NetHttpTransport HTTP_TRANSPORT) throws IOException {
         // Load client secrets.
-        InputStream in = DriveService.class.getResourceAsStream(CREDENTIALS_FILE_PATH);
-        if (in == null) {
-            throw new FileNotFoundException("Resource not found: " + CREDENTIALS_FILE_PATH);
+        GoogleClientSecrets clientSecrets;
+        try (InputStream in = DriveService.class.getResourceAsStream(CREDENTIALS_FILE_PATH)) {
+            if (in == null) {
+                throw new FileNotFoundException("Resource not found: " + CREDENTIALS_FILE_PATH);
+            }
+            clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));
         }
-        GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));
 
         // Build flow and trigger user authorization request.
         GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(
@@ -99,7 +97,7 @@ public class DriveService implements Service.Interface.IDriveService {
     public ArrayList<GFile> search(String pattern) throws IOException, GeneralSecurityException {
         final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
         Credential credential = getCredentials(HTTP_TRANSPORT);
-        //credential.refreshToken();
+        /* credential.refreshToken(); */
         Drive service = new Drive.Builder(HTTP_TRANSPORT, JSON_FACTORY, credential)
                 .setApplicationName(APPLICATION_NAME)
                 .build();

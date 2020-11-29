@@ -12,11 +12,9 @@ import Controller.AppController;
 import Controller.Interface.IAppController;
 import Repository.Interface.IStorageRepository;
 import Service.DriveService;
-import Service.Interface.IDriveService;
-import Service.Interface.IMergeService;
-import Service.Interface.ITextService;
+import Service.EverynoteService;
+import Service.Interface.*;
 import Repository.StorageRepository;
-import Service.Interface.MergeService;
 import Service.TextService;
 import Parser.Interface.IParagraphTextParser;
 import Parser.ParagraphTextParser;
@@ -33,6 +31,7 @@ public class BasicModule extends AbstractModule {
         bind(new TypeLiteral<IStorageCommandHandler<SaveStorageCommand>>() {}).to(SaveStorageCommandHandler.class);
         bind(new TypeLiteral<IStorageCommandHandler<SetBAttrCommand>>() {}).to(SetBAttrCommandHandler.class);
         bind(new TypeLiteral<IStorageCommandHandler<StatisticsCommand>>() {}).to(StatisticsCommandHandler.class);
+        bind(new TypeLiteral<IStorageCommandHandler<ConnectEverynoteCommand>>() {}).to(ConnectEverynoteCommandHandler.class);
 
         bind(IStorageCommandBus.class).to(StorageCommandBus.class);
 
@@ -43,6 +42,7 @@ public class BasicModule extends AbstractModule {
         bind(ITreeMerger.class).to(TreeMerger.class);
         bind(IParagraphTextParser.class).to(ParagraphTextParser.class);
         bind(IMergeService.class).to(MergeService.class);
-        bind(IDriveService.class).to(DriveService.class);
+        //bind(IDriveService.class).to(DriveService.class);
+        bind(IEverynoteService.class).to(EverynoteService.class).asEagerSingleton();
     }
 }

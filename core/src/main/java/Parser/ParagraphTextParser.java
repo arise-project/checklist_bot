@@ -29,7 +29,6 @@ public class ParagraphTextParser implements IParagraphTextParser {
 
 		String st = null;
 		int count = 0;
-		int index = 0;
 		Note node = new Note();
 		StringBuilder sb = new StringBuilder();
 		do{
@@ -52,7 +51,6 @@ public class ParagraphTextParser implements IParagraphTextParser {
 						node = new Note();
 						sb = new StringBuilder();
 						count = 0;
-						index++;
 					}
 				}
 				else {

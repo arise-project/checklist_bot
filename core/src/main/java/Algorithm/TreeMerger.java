@@ -20,8 +20,7 @@ public class TreeMerger implements ITreeMerger {
     public ArrayList<MergeNote> getDifference(Root oldTree, Root newTree) {
         Map<Integer, Node> oldNotes = walker.getInBreadth(oldTree);
         Map<Integer, Node> newNotes = walker.getInBreadth(newTree);
-        Set<Integer> newSet = new HashSet<>();
-        newSet.addAll(newNotes.keySet());
+        Set<Integer> newSet = new HashSet<>(newNotes.keySet());
         for (var hash: newSet) {
             if(oldNotes.containsKey(hash))
             {

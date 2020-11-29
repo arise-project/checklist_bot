@@ -4,13 +4,10 @@ import Algorithm.Interface.ITreeMerger;
 import Command.Handler.Interface.IStorageCommandHandler;
 import Command.OpenStorageCommand;
 import Command.StorageCommandType;
-import Domain.MergeNote;
 import Domain.Root;
 import Repository.Interface.IStorageRepository;
 import Service.Interface.IMergeService;
 import com.google.inject.Inject;
-
-import java.util.ArrayList;
 
 public class OpenStorageCommandHandler implements IStorageCommandHandler<OpenStorageCommand> {
     private final IStorageRepository storage;

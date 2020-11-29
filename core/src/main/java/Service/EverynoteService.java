@@ -24,11 +24,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import static java.lang.System.*;
+
 public class EverynoteService implements Service.Interface.IEverynoteService {
-    private UserStoreClient userStore;
     private NoteStoreClient noteStore;
     //https://dev.evernote.com/get-token/
-    private static String Token = System.getenv("everynote");
+    private static String Token = getenv("everynote");
+
     private boolean isSandbox = true;
 
     public void EnableProduction()
@@ -44,13 +46,13 @@ public class EverynoteService implements Service.Interface.IEverynoteService {
                     isSandbox? EvernoteService.SANDBOX : EvernoteService.PRODUCTION,
                     Token);
             ClientFactory factory = new ClientFactory(evernoteAuth);
-            userStore = factory.createUserStoreClient();
+            UserStoreClient userStore = factory.createUserStoreClient();
 
             boolean versionOk = userStore.checkVersion("checklist",
                     com.evernote.edam.userstore.Constants.EDAM_VERSION_MAJOR,
                     com.evernote.edam.userstore.Constants.EDAM_VERSION_MINOR);
             if (!versionOk) {
-                System.err.println("Incompatible Evernote client protocol version");
+                err.println("Incompatible Evernote client protocol version");
                 return false;
             }
 
@@ -59,17 +61,9 @@ public class EverynoteService implements Service.Interface.IEverynoteService {
             noteStore = factory.createNoteStoreClient();
             return true;
         }
-        catch(TException e)
+        catch(TException | EDAMSystemException | EDAMUserException e)
         {
-            System.err.println(e.getMessage());
-        }
-        catch(EDAMSystemException e)
-        {
-            System.err.println(e.getMessage());
-        }
-        catch(EDAMUserException e)
-        {
-            System.err.println(e.getMessage());
+            err.println(e.getMessage());
         }
 
         return false;
@@ -81,20 +75,14 @@ public class EverynoteService implements Service.Interface.IEverynoteService {
         List<Notebook> notebooks;
         try {
             notebooks = noteStore.listNotebooks();
-        } catch (TException e) {
-            System.err.println(e.getMessage());
-            return null;
-        } catch (EDAMUserException e) {
-            System.err.println(e.getMessage());
-            return null;
-        } catch (EDAMSystemException e) {
-            System.err.println(e.getMessage());
+        } catch (TException | EDAMUserException | EDAMSystemException e) {
+            err.println(e.getMessage());
             return null;
         }
 
         ArrayList<ENotebook> result = new ArrayList<>();
         for (Notebook notebook : notebooks) {
-            System.out.println("Notebook: " + notebook.getName());
+            out.println("Notebook: " + notebook.getName());
             result.add(new ENotebook(notebook.getGuid(), notebook.getName()));
         }
         return  result;
@@ -106,19 +94,13 @@ public class EverynoteService implements Service.Interface.IEverynoteService {
         List<Notebook> notebooks;
         try{
             notebooks = noteStore.listNotebooks();
-        } catch (TException e) {
-            System.err.println(e.getMessage());
-            return null;
-        } catch (EDAMUserException e) {
-            System.err.println(e.getMessage());
-            return null;
-        } catch (EDAMSystemException e) {
-            System.err.println(e.getMessage());
+        } catch (TException | EDAMUserException | EDAMSystemException e) {
+            err.println(e.getMessage());
             return null;
         }
         ArrayList<ENote> result = new ArrayList<>();
         for (Notebook notebook : notebooks) {
-            System.out.println("Notebook: " + notebook.getName());
+            out.println("Notebook: " + notebook.getName());
 
             // Next, search for the first 100 notes in this notebook, ordering
             // by creation date
@@ -130,39 +112,21 @@ public class EverynoteService implements Service.Interface.IEverynoteService {
             NoteList noteList;
             try{
                 noteList = noteStore.findNotes(filter, 0, 100);
-            } catch (EDAMSystemException e) {
-                System.err.println(e.getMessage());
-                return null;
-            } catch (EDAMNotFoundException e) {
-                System.err.println(e.getMessage());
-                return null;
-            } catch (EDAMUserException e) {
-                System.err.println(e.getMessage());
-                return null;
-            } catch (TException e) {
-                System.err.println(e.getMessage());
+            } catch (EDAMSystemException | EDAMNotFoundException | EDAMUserException | TException e) {
+                err.println(e.getMessage());
                 return null;
             }
 
             List<Note> notes = noteList.getNotes();
 
             for (Note note : notes) {
-                System.out.println(" * " + note.getTitle());
+                out.println(" * " + note.getTitle());
                 Note noteDetails = null;
                 ENote info = null;
                 try {
                     noteDetails = noteStore.getNote(note.getGuid(), true, true, true, true);
-                } catch (EDAMSystemException e) {
-                    System.err.println(e.getMessage());
-                    info = new ENote(note.getGuid(), note.getNotebookGuid(),e.getMessage());
-                } catch (EDAMNotFoundException e) {
-                    System.err.println(e.getMessage());
-                    info = new ENote(note.getGuid(), note.getNotebookGuid(),e.getMessage());
-                } catch (EDAMUserException e) {
-                    System.err.println(e.getMessage());
-                    info = new ENote(note.getGuid(), note.getNotebookGuid(),e.getMessage());
-                } catch (TException e) {
-                    System.err.println(e.getMessage());
+                } catch (EDAMSystemException | EDAMNotFoundException | EDAMUserException | TException e) {
+                    err.println(e.getMessage());
                     info = new ENote(note.getGuid(), note.getNotebookGuid(),e.getMessage());
                 }
                 if(noteDetails != null){
@@ -177,14 +141,8 @@ public class EverynoteService implements Service.Interface.IEverynoteService {
                     String content;
                     try{
                         content = new TikaService().extract(noteDetails.getContent());
-                    } catch (SAXException e) {
-                        System.err.println(e.getMessage());
-                        content = noteDetails.getContent();
-                    } catch (TikaException e) {
-                        System.err.println(e.getMessage());
-                        content = noteDetails.getContent();
-                    } catch (IOException e) {
-                        System.err.println(e.getMessage());
+                    } catch (SAXException | TikaException | IOException e) {
+                        err.println(e.getMessage());
                         content = noteDetails.getContent();
                     }
                     info = new ENote(
@@ -237,17 +195,8 @@ public class EverynoteService implements Service.Interface.IEverynoteService {
         NoteList notes;
         try{
             notes = noteStore.findNotes(filter, 0, 1);
-        } catch (EDAMSystemException e) {
-            System.err.println(e.getMessage());
-            return null;
-        } catch (EDAMNotFoundException e) {
-            System.err.println(e.getMessage());
-            return null;
-        } catch (EDAMUserException e) {
-            System.err.println(e.getMessage());
-            return null;
-        } catch (TException e) {
-            System.err.println(e.getMessage());
+        } catch (EDAMSystemException | EDAMNotFoundException | EDAMUserException | TException e) {
+            err.println(e.getMessage());
             return null;
         }
 
@@ -257,17 +206,8 @@ public class EverynoteService implements Service.Interface.IEverynoteService {
             Note noteDetails;
             try{
                 noteDetails = noteStore.getNote(note.getGuid(), true, true, true, true);
-            } catch (EDAMSystemException e) {
-                System.err.println(e.getMessage());
-                return new ENote(note.getGuid(), note.getNotebookGuid(),e.getMessage());
-            } catch (EDAMNotFoundException e) {
-                System.err.println(e.getMessage());
-                return new ENote(note.getGuid(), note.getNotebookGuid(),e.getMessage());
-            } catch (EDAMUserException e) {
-                System.err.println(e.getMessage());
-                return new ENote(note.getGuid(), note.getNotebookGuid(),e.getMessage());
-            } catch (TException e) {
-                System.err.println(e.getMessage());
+            } catch (EDAMSystemException | EDAMNotFoundException | EDAMUserException | TException e) {
+                err.println(e.getMessage());
                 return new ENote(note.getGuid(), note.getNotebookGuid(),e.getMessage());
             }
 
@@ -282,17 +222,11 @@ public class EverynoteService implements Service.Interface.IEverynoteService {
             String content;
             try{
                 content = new TikaService().extract(noteDetails.getContent());
-            } catch (SAXException e) {
-                System.err.println(e.getMessage());
-                content = noteDetails.getContent();
-            } catch (TikaException e) {
-                System.err.println(e.getMessage());
-                content = noteDetails.getContent();
-            } catch (IOException e) {
-                System.err.println(e.getMessage());
+            } catch (SAXException | TikaException | IOException e) {
+                err.println(e.getMessage());
                 content = noteDetails.getContent();
             }
-            
+
             return new ENote(
                     content,
                     length,
@@ -304,5 +238,7 @@ public class EverynoteService implements Service.Interface.IEverynoteService {
                     updated,
                     sequenceNum);
         }
+
+        return null;
     }
 }

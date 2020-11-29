@@ -18,13 +18,15 @@ public class StorageCommandBus implements IStorageCommandBus {
             IStorageCommandHandler<ResetAttrCommand> resetAttrCommandHandler,
             IStorageCommandHandler<SaveStorageCommand> saveStorageCommandHandler,
             IStorageCommandHandler<SetBAttrCommand> setBAttrCommandHandler,
-            IStorageCommandHandler<StatisticsCommand> statisticsCommandHandler){
+            IStorageCommandHandler<StatisticsCommand> statisticsCommandHandler,
+            IStorageCommandHandler<ConnectEverynoteCommand> connectEverynoteCommandHandler){
         RegisterCommandHandler(openStorageCommandHandler);
         RegisterCommandHandler(readTextFileCommandHandler);
         RegisterCommandHandler(resetAttrCommandHandler);
         RegisterCommandHandler(saveStorageCommandHandler);
         RegisterCommandHandler(setBAttrCommandHandler);
         RegisterCommandHandler(statisticsCommandHandler);
+        RegisterCommandHandler(connectEverynoteCommandHandler);
     }
 
     public <TCommand extends IStorageCommand> void Dispatch(TCommand command)

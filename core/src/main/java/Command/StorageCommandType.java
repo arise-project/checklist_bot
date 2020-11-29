@@ -6,5 +6,6 @@ public enum StorageCommandType {
     OpenStorage,
     SaveStorage,
     SetBAttr,
-    ResetAttr
+    ResetAttr,
+    ConnectEverynote
 }
