@@ -1,13 +1,14 @@
 package Service.Interface;
 
-import com.evernote.edam.error.EDAMSystemException;
-import com.evernote.edam.error.EDAMUserException;
-import com.evernote.thrift.TException;
+import Domain.Everynote.ENote;
+import Domain.Everynote.ENotebook;
+
+import java.util.ArrayList;
 
 public interface IEverynoteService {
-    void auth() throws TException, EDAMSystemException, EDAMUserException;
-
-    void listNotes() throws Exception;
-
-    void searchNotes() throws Exception;
+    void EnableProduction();
+    boolean auth();
+    ArrayList<ENotebook> listNotebooks();
+    ArrayList<ENote> listAllNotes();
+    ENote searchNotes(String title);
 }

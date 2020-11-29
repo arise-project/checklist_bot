@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.opengis:geoapi:3.0.1">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.opengis/geoapi/3.0.1/a69b261841b0794b82b8d42fcd6e9a370eb62809/geoapi-3.0.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.opengis/geoapi/3.0.1/8c56e525fe648bf5027320e0e67430b1836f4c40/geoapi-3.0.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

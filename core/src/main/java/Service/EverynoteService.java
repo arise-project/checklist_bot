@@ -1,10 +1,13 @@
 package Service;
 
+import Domain.Everynote.ENote;
+import Domain.Everynote.ENotebook;
 import com.evernote.auth.EvernoteAuth;
 import com.evernote.auth.EvernoteService;
 import com.evernote.clients.ClientFactory;
 import com.evernote.clients.NoteStoreClient;
 import com.evernote.clients.UserStoreClient;
+import com.evernote.edam.error.EDAMNotFoundException;
 import com.evernote.edam.error.EDAMSystemException;
 import com.evernote.edam.error.EDAMUserException;
 import com.evernote.edam.notestore.NoteFilter;
@@ -13,46 +16,107 @@ import com.evernote.edam.type.Note;
 import com.evernote.edam.type.NoteSortOrder;
 import com.evernote.edam.type.Notebook;
 import com.evernote.thrift.TException;
+import org.apache.tika.exception.TikaException;
+import org.xml.sax.SAXException;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 public class EverynoteService implements Service.Interface.IEverynoteService {
     private UserStoreClient userStore;
     private NoteStoreClient noteStore;
-    private static String Token;
+    //https://dev.evernote.com/get-token/
+    private static String Token = System.getenv("everynote");
+    private boolean isSandbox = true;
 
-    public void setToken(String token)
+    public void EnableProduction()
     {
-        Token = token;
+        isSandbox = false;
     }
 
     @Override
-    public void auth() throws TException, EDAMSystemException, EDAMUserException {
-        EvernoteAuth evernoteAuth = new EvernoteAuth(EvernoteService.SANDBOX, Token);
-        ClientFactory factory = new ClientFactory(evernoteAuth);
-        userStore = factory.createUserStoreClient();
+    public boolean auth() {
+        try
+        {
+            EvernoteAuth evernoteAuth = new EvernoteAuth(
+                    isSandbox? EvernoteService.SANDBOX : EvernoteService.PRODUCTION,
+                    Token);
+            ClientFactory factory = new ClientFactory(evernoteAuth);
+            userStore = factory.createUserStoreClient();
 
-        boolean versionOk = userStore.checkVersion("Evernote EDAMDemo (Java)",
-                com.evernote.edam.userstore.Constants.EDAM_VERSION_MAJOR,
-                com.evernote.edam.userstore.Constants.EDAM_VERSION_MINOR);
-        if (!versionOk) {
-            System.err.println("Incompatible Evernote client protocol version");
-            System.exit(1);
+            boolean versionOk = userStore.checkVersion("checklist",
+                    com.evernote.edam.userstore.Constants.EDAM_VERSION_MAJOR,
+                    com.evernote.edam.userstore.Constants.EDAM_VERSION_MINOR);
+            if (!versionOk) {
+                System.err.println("Incompatible Evernote client protocol version");
+                return false;
+            }
+
+            // Set up the NoteStore client
+            //EDAMSystemException(errorCode:INVALID_AUTH, message:authenticationToken)
+            noteStore = factory.createNoteStoreClient();
+            return true;
+        }
+        catch(TException e)
+        {
+            System.err.println(e.getMessage());
+        }
+        catch(EDAMSystemException e)
+        {
+            System.err.println(e.getMessage());
+        }
+        catch(EDAMUserException e)
+        {
+            System.err.println(e.getMessage());
         }
 
-        // Set up the NoteStore client
-        noteStore = factory.createNoteStoreClient();
+        return false;
     }
 
     @Override
-    public void listNotes() throws Exception {
-        // List the notes in the user's account
-        System.out.println("Listing notes:");
-
+    public ArrayList<ENotebook> listNotebooks() {
         // First, get a list of all notebooks
-        List<Notebook> notebooks = noteStore.listNotebooks();
+        List<Notebook> notebooks;
+        try {
+            notebooks = noteStore.listNotebooks();
+        } catch (TException e) {
+            System.err.println(e.getMessage());
+            return null;
+        } catch (EDAMUserException e) {
+            System.err.println(e.getMessage());
+            return null;
+        } catch (EDAMSystemException e) {
+            System.err.println(e.getMessage());
+            return null;
+        }
 
+        ArrayList<ENotebook> result = new ArrayList<>();
+        for (Notebook notebook : notebooks) {
+            System.out.println("Notebook: " + notebook.getName());
+            result.add(new ENotebook(notebook.getGuid(), notebook.getName()));
+        }
+        return  result;
+    }
+
+    @Override
+    public ArrayList<ENote> listAllNotes() {
+        // First, get a list of all notebooks
+        List<Notebook> notebooks;
+        try{
+            notebooks = noteStore.listNotebooks();
+        } catch (TException e) {
+            System.err.println(e.getMessage());
+            return null;
+        } catch (EDAMUserException e) {
+            System.err.println(e.getMessage());
+            return null;
+        } catch (EDAMSystemException e) {
+            System.err.println(e.getMessage());
+            return null;
+        }
+        ArrayList<ENote> result = new ArrayList<>();
         for (Notebook notebook : notebooks) {
             System.out.println("Notebook: " + notebook.getName());
 
@@ -60,25 +124,94 @@ public class EverynoteService implements Service.Interface.IEverynoteService {
             // by creation date
             NoteFilter filter = new NoteFilter();
             filter.setNotebookGuid(notebook.getGuid());
-            filter.setOrder(NoteSortOrder.CREATED.getValue());
-            filter.setAscending(true);
+            filter.setOrder(NoteSortOrder.UPDATED.getValue());
+            filter.setAscending(false);
 
-            NoteList noteList = noteStore.findNotes(filter, 0, 100);
+            NoteList noteList;
+            try{
+                noteList = noteStore.findNotes(filter, 0, 100);
+            } catch (EDAMSystemException e) {
+                System.err.println(e.getMessage());
+                return null;
+            } catch (EDAMNotFoundException e) {
+                System.err.println(e.getMessage());
+                return null;
+            } catch (EDAMUserException e) {
+                System.err.println(e.getMessage());
+                return null;
+            } catch (TException e) {
+                System.err.println(e.getMessage());
+                return null;
+            }
+
             List<Note> notes = noteList.getNotes();
+
             for (Note note : notes) {
                 System.out.println(" * " + note.getTitle());
-                Note noteDetails = noteStore.getNote(note.getGuid(), true, true, true, true);
-                System.out.println("content " + new TikaService().extract(noteDetails.getContent()));
+                Note noteDetails = null;
+                ENote info = null;
+                try {
+                    noteDetails = noteStore.getNote(note.getGuid(), true, true, true, true);
+                } catch (EDAMSystemException e) {
+                    System.err.println(e.getMessage());
+                    info = new ENote(note.getGuid(), note.getNotebookGuid(),e.getMessage());
+                } catch (EDAMNotFoundException e) {
+                    System.err.println(e.getMessage());
+                    info = new ENote(note.getGuid(), note.getNotebookGuid(),e.getMessage());
+                } catch (EDAMUserException e) {
+                    System.err.println(e.getMessage());
+                    info = new ENote(note.getGuid(), note.getNotebookGuid(),e.getMessage());
+                } catch (TException e) {
+                    System.err.println(e.getMessage());
+                    info = new ENote(note.getGuid(), note.getNotebookGuid(),e.getMessage());
+                }
+                if(noteDetails != null){
+                    int length = noteDetails.getContentLength();
+                    byte[] hash = noteDetails.getContentHash();
+                    long created = noteDetails.getCreated();
+                    String guid = noteDetails.getGuid();
+                    String notebookGuid = noteDetails.getNotebookGuid();
+                    String title = noteDetails.getTitle();
+                    long updated = noteDetails.getUpdated();
+                    int sequenceNum = noteDetails.getUpdateSequenceNum();
+                    String content;
+                    try{
+                        content = new TikaService().extract(noteDetails.getContent());
+                    } catch (SAXException e) {
+                        System.err.println(e.getMessage());
+                        content = noteDetails.getContent();
+                    } catch (TikaException e) {
+                        System.err.println(e.getMessage());
+                        content = noteDetails.getContent();
+                    } catch (IOException e) {
+                        System.err.println(e.getMessage());
+                        content = noteDetails.getContent();
+                    }
+                    info = new ENote(
+                            content,
+                            length,
+                            hash,
+                            created,
+                            guid,
+                            notebookGuid,
+                            title,
+                            updated,
+                            sequenceNum);
+                }
+
+                if(info != null) {
+                    result.add(info);
+                }
             }
         }
-        System.out.println();
+        return result;
     }
 
     /**
      * Search a user's notes and display the results.
      */
     @Override
-    public void searchNotes() throws Exception {
+    public ENote searchNotes(String title) {
         // Searches are formatted according to the Evernote search grammar.
         // Learn more at
         // https://dev.evernote.com/doc/articles/search_grammar.php
@@ -87,7 +220,7 @@ public class EverynoteService implements Service.Interface.IEverynoteService {
         // In this example, we search for notes that have the term "EDAMDemo" in
         // the title.
         // This should return the sample note that we created in this demo app.
-        String query = "intitle:test1";
+        String query = "intitle:"+title;
 
         // To search for notes with a specific tag, we could do something like
         // this:
@@ -101,28 +234,75 @@ public class EverynoteService implements Service.Interface.IEverynoteService {
         filter.setOrder(NoteSortOrder.UPDATED.getValue());
         filter.setAscending(false);
 
-        // Find the first 50 notes matching the search
-        System.out.println("Searching for notes matching query: " + query);
-        NoteList notes = noteStore.findNotes(filter, 0, 50);
-        System.out.println("Found " + notes.getTotalNotes() + " matching notes");
+        NoteList notes;
+        try{
+            notes = noteStore.findNotes(filter, 0, 1);
+        } catch (EDAMSystemException e) {
+            System.err.println(e.getMessage());
+            return null;
+        } catch (EDAMNotFoundException e) {
+            System.err.println(e.getMessage());
+            return null;
+        } catch (EDAMUserException e) {
+            System.err.println(e.getMessage());
+            return null;
+        } catch (TException e) {
+            System.err.println(e.getMessage());
+            return null;
+        }
 
         Iterator<Note> iter = notes.getNotesIterator();
         while (iter.hasNext()) {
             Note note = iter.next();
-            System.out.println("Note: " + note.getTitle());
+            Note noteDetails;
+            try{
+                noteDetails = noteStore.getNote(note.getGuid(), true, true, true, true);
+            } catch (EDAMSystemException e) {
+                System.err.println(e.getMessage());
+                return new ENote(note.getGuid(), note.getNotebookGuid(),e.getMessage());
+            } catch (EDAMNotFoundException e) {
+                System.err.println(e.getMessage());
+                return new ENote(note.getGuid(), note.getNotebookGuid(),e.getMessage());
+            } catch (EDAMUserException e) {
+                System.err.println(e.getMessage());
+                return new ENote(note.getGuid(), note.getNotebookGuid(),e.getMessage());
+            } catch (TException e) {
+                System.err.println(e.getMessage());
+                return new ENote(note.getGuid(), note.getNotebookGuid(),e.getMessage());
+            }
 
-            // Note objects returned by findNotes() only contain note attributes
-            // such as title, GUID, creation date, update date, etc. The note
-            // content
-            // and binary resource data are omitted, although resource metadata
-            // is included.
-            // To get the note content and/or binary resources, call getNote()
-            // using the note's GUID.
-            Note fullNote = noteStore.getNote(note.getGuid(), true, true, false,
-                    false);
-            System.out.println("Note contains " + fullNote.getResourcesSize()
-                    + " resources");
-            System.out.println();
+            int length = noteDetails.getContentLength();
+            byte[] hash = noteDetails.getContentHash();
+            long created = noteDetails.getCreated();
+            String guid = noteDetails.getGuid();
+            String notebookGuid = noteDetails.getNotebookGuid();
+            String noteTitle = noteDetails.getTitle();
+            long updated = noteDetails.getUpdated();
+            int sequenceNum = noteDetails.getUpdateSequenceNum();
+            String content;
+            try{
+                content = new TikaService().extract(noteDetails.getContent());
+            } catch (SAXException e) {
+                System.err.println(e.getMessage());
+                content = noteDetails.getContent();
+            } catch (TikaException e) {
+                System.err.println(e.getMessage());
+                content = noteDetails.getContent();
+            } catch (IOException e) {
+                System.err.println(e.getMessage());
+                content = noteDetails.getContent();
+            }
+            
+            return new ENote(
+                    content,
+                    length,
+                    hash,
+                    created,
+                    guid,
+                    notebookGuid,
+                    noteTitle,
+                    updated,
+                    sequenceNum);
         }
     }
 }

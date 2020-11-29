@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.apache.sis.core:sis-feature:1.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.sis.core/sis-feature/1.0/4178a349ce0c14bc442d97ed43c13a9f6b6b53e8/sis-feature-1.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.sis.core/sis-feature/1.0/d6db0e09e2e5b3078c9e833efd44e5198151ccae/sis-feature-1.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

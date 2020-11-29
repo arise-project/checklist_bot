@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.apache.cxf:cxf-rt-frontend-jaxrs:3.3.6">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.cxf/cxf-rt-frontend-jaxrs/3.3.6/5c330c35024dda07601b059cb68258b53fdd22fb/cxf-rt-frontend-jaxrs-3.3.6.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.cxf/cxf-rt-frontend-jaxrs/3.3.6/85e40c761e2b07cfe72204c8a45bc8b5de54db20/cxf-rt-frontend-jaxrs-3.3.6-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

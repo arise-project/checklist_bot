@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.openjson:openjson:1.0.12">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.openjson/openjson/1.0.12/9c0663c10b48a889709a2d125580a3f22b975769/openjson-1.0.12.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.openjson/openjson/1.0.12/df53964cda8239e782e6932bda252b2ee7046d97/openjson-1.0.12-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

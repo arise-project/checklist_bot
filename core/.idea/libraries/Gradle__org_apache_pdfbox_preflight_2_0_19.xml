@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.apache.pdfbox:preflight:2.0.19">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.pdfbox/preflight/2.0.19/c7c0c9e9e243902139c5beae27350f600084c18a/preflight-2.0.19.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.pdfbox/preflight/2.0.19/3ede09ef9d8fce8d19b384d338fbb2950d9b90bf/preflight-2.0.19-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
