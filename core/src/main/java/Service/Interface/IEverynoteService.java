@@ -14,5 +14,7 @@ public interface IEverynoteService {
 
     ArrayList<ENote> listNotes(ENotebook parent);
 
+    ENote fillNote(ENote note);
+
     ENote searchNote(String title);
 }

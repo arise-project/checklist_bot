@@ -20,3 +20,9 @@ cd build/libs/
 
 java -jar -Xmx512M --illegal-access=warn checklist_bot-all-1.0.jar
 
+
+https://sandbox.evernote.com
+
+gradle run --args="connect_everynote list_enotebooks list_all_enotes list_enotes_for_notebook eat"
+gradle run --args="connect_everynote read_enote plov statistics save_storage 1.xml"
+

@@ -4,19 +4,18 @@ import Domain.Node;
 import Domain.Note;
 import Parser.Interface.IParagraphTextParser;
 
+import java.io.*;
 import java.util.ArrayList;
-import java.io.File;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.FileNotFoundException;
 
 public class ParagraphTextParser implements IParagraphTextParser {
+	@Override
+	public ArrayList<Node> parseText(String content){
+		BufferedReader reader = new BufferedReader(new StringReader(content));
+		return parse(reader);
+	}
 
 	@Override
 	public ArrayList<Node> parseTextFile(String filePath){
-		ArrayList<Node> notes = new ArrayList<>();
-
 		File file = new File(filePath);
 		BufferedReader reader;
 		try{
@@ -24,8 +23,14 @@ public class ParagraphTextParser implements IParagraphTextParser {
 		}
 		catch(FileNotFoundException e){
 			e.printStackTrace();
-			return notes;
+			return new ArrayList<>();
 		}
+
+		return parse(reader);
+	}
+
+	private ArrayList<Node> parse(BufferedReader reader){
+		ArrayList<Node> notes = new ArrayList<>();
 
 		String st = null;
 		int count = 0;
@@ -39,7 +44,7 @@ public class ParagraphTextParser implements IParagraphTextParser {
 			catch(IOException e){
 				e.printStackTrace();
 			}
-			
+
 			if(st != null){
 				if(st.trim().length() == 0)
 				{

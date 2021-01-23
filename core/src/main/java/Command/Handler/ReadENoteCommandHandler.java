@@ -12,6 +12,9 @@ import Service.Interface.IMergeService;
 import Service.Interface.ITextService;
 import com.google.inject.Inject;
 
+import java.util.ArrayList;
+import java.util.Optional;
+
 public class ReadENoteCommandHandler implements IStorageCommandHandler<ReadENoteCommand> {
     private final IStorageRepository storage;
     private final ITextService text;
@@ -38,8 +41,15 @@ public class ReadENoteCommandHandler implements IStorageCommandHandler<ReadENote
         readENoteCommand.getRoot().setName(readENoteCommand.getName());
         Root newRoot = new Root();
         newRoot.setName(readENoteCommand.getName());
-        ENote note = everynoteService.searchNote(readENoteCommand.getName());
-        text.parseENote(newRoot, note);
+        ArrayList<ENote> notes = everynoteService.listAllNotes();
+
+        Optional<ENote> note =notes.stream().filter(n -> n.getTitle().trim().equalsIgnoreCase(readENoteCommand.getName().trim())).findFirst();
+        if(note.isEmpty()){
+            System.out.println("NOT FOUND");
+            return;
+        }
+        ENote fullNote = everynoteService.fillNote(note.get());
+        text.parseENote(newRoot, fullNote);
         if(readENoteCommand.getRoot().getNodes().size() > 0)
         {
             mergeService.printDiff(merger.getDifference(readENoteCommand.getRoot(), newRoot));

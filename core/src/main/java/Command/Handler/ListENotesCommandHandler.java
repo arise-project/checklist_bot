@@ -10,6 +10,9 @@ import Service.Interface.IEverynoteService;
 import com.google.inject.Inject;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Optional;
 
 public class ListENotesCommandHandler implements IStorageCommandHandler<ListENotesForNotebookCommand> {
     private final IEverynoteService everynoteService;
@@ -21,28 +24,24 @@ public class ListENotesCommandHandler implements IStorageCommandHandler<ListENot
 
     @Override
     public void handle(ListENotesForNotebookCommand listENotesForNotebookCommand) {
-        System.out.println("list everynote notes");
+        System.out.println("notes for " + listENotesForNotebookCommand.getName());
         ArrayList<ENotebook> notebooks = everynoteService.listNotebooks();
-        ENotebook notebook = null;
-        for(var n : notebooks) {
-            if(n.getName() == listENotesForNotebookCommand.getName())
-            {
-                notebook = new ENotebook(n.getGuid(), n.getName());
-            }
-        }
-        if(notebook == null) {
+        Optional<ENotebook> notebook = notebooks.stream().filter(n -> n.getName().trim().equalsIgnoreCase(listENotesForNotebookCommand.getName().trim())).findFirst();
+
+        if(notebook.isEmpty()) {
             System.out.println("NOT FOUND");
             return;
         }
 
-        ArrayList<ENote> notes = everynoteService.listNotes(notebook);
+        ArrayList<ENote> notes = everynoteService.listNotes(notebook.get());
+        notes.sort(Comparator.comparing(ENote::getUpdated, Collections.reverseOrder()));
         for (ENote note : notes)
         {
             System.out.println("=========");
             System.out.println(note.getTitle());
             System.out.println(note.getUpdated());
             System.out.println(note.getCreated());
-            System.out.println(notebook.getName() + " notebook");
+            System.out.println(notebook.get().getName() + " notebook");
             System.out.println("=========");
         }
     }

@@ -10,8 +10,7 @@ import com.evernote.clients.UserStoreClient;
 import com.evernote.edam.error.EDAMNotFoundException;
 import com.evernote.edam.error.EDAMSystemException;
 import com.evernote.edam.error.EDAMUserException;
-import com.evernote.edam.notestore.NoteFilter;
-import com.evernote.edam.notestore.NoteList;
+import com.evernote.edam.notestore.*;
 import com.evernote.edam.type.Note;
 import com.evernote.edam.type.NoteSortOrder;
 import com.evernote.edam.type.Notebook;
@@ -23,6 +22,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 import static java.lang.System.*;
 
@@ -87,7 +87,6 @@ public class EverynoteService implements Service.Interface.IEverynoteService {
 
         ArrayList<ENotebook> result = new ArrayList<>();
         for (Notebook notebook : notebooks) {
-            out.println("Notebook: " + notebook.getName());
             result.add(new ENotebook(notebook.getGuid(), notebook.getName()));
         }
         return  result;
@@ -180,25 +179,19 @@ public class EverynoteService implements Service.Interface.IEverynoteService {
             return null;
         }
         ArrayList<ENote> result = new ArrayList<>();
-        Notebook notebook = null;
-        for (Notebook n : notebooks) {
-            if(n.getGuid() == parent.getGuid()) {
-                notebook = n;
-                break;
-            }
-        }
+        Optional<Notebook> notebook = notebooks.stream().filter(n -> n.getName().trim().equalsIgnoreCase(parent.getName().trim())).findFirst();
 
-        if(notebook == null) {
+        if(notebook.isEmpty()) {
             out.println("NOT FOUND");
             return result;
         }
 
-        out.println("Notebook: " + notebook.getName());
+        out.println("Notebook: " + notebook.get().getName());
 
         // Next, search for the first 100 notes in this notebook, ordering
         // by creation date
         NoteFilter filter = new NoteFilter();
-        filter.setNotebookGuid(notebook.getGuid());
+        filter.setNotebookGuid(notebook.get().getGuid());
         filter.setOrder(NoteSortOrder.UPDATED.getValue());
         filter.setAscending(false);
 
@@ -257,6 +250,43 @@ public class EverynoteService implements Service.Interface.IEverynoteService {
         return result;
     }
 
+    @Override
+    public ENote fillNote(ENote note){
+        Note noteDetails;
+        try{
+            noteDetails = noteStore.getNote(note.getGuid(), true, true, true, true);
+        } catch (EDAMSystemException | EDAMNotFoundException | EDAMUserException | TException e) {
+            err.println(e.getMessage());
+            return new ENote(note.getGuid(), note.getNotebookGuid(),e.getMessage());
+        }
+
+        int length = noteDetails.getContentLength();
+        byte[] hash = noteDetails.getContentHash();
+        long created = noteDetails.getCreated();
+        String guid = noteDetails.getGuid();
+        String notebookGuid = noteDetails.getNotebookGuid();
+        String noteTitle = noteDetails.getTitle();
+        long updated = noteDetails.getUpdated();
+        int sequenceNum = noteDetails.getUpdateSequenceNum();
+        String content;
+        try{
+            content = new TikaService().extract(noteDetails.getContent());
+        } catch (SAXException | TikaException | IOException e) {
+            err.println(e.getMessage());
+            content = noteDetails.getContent();
+        }
+
+        return new ENote(
+                content,
+                length,
+                hash,
+                created,
+                guid,
+                notebookGuid,
+                noteTitle,
+                updated,
+                sequenceNum);
+    }
     /**
      * Search a user's notes and display the results.
      */
@@ -280,21 +310,23 @@ public class EverynoteService implements Service.Interface.IEverynoteService {
         // String query = "elephant";
 
         NoteFilter filter = new NoteFilter();
+        //todo: https://dev.evernote.com/doc/articles/searching_notes.php
         filter.setWords(query);
         filter.setOrder(NoteSortOrder.UPDATED.getValue());
         filter.setAscending(false);
-
-        NoteList notes;
+        NotesMetadataResultSpec spec = new NotesMetadataResultSpec();
+        spec.setIncludeTitle(true);
+        NotesMetadataList notes;
         try{
-            notes = noteStore.findNotes(filter, 0, 1);
+            notes = noteStore.findNotesMetadata(filter, 0, 1, spec);
         } catch (EDAMSystemException | EDAMNotFoundException | EDAMUserException | TException e) {
             err.println(e.getMessage());
             return null;
         }
-
-        Iterator<Note> iter = notes.getNotesIterator();
+        out.println(notes.getNotesSize());
+        Iterator<NoteMetadata> iter = notes.getNotesIterator();
         while (iter.hasNext()) {
-            Note note = iter.next();
+            NoteMetadata note = iter.next();
             Note noteDetails;
             try{
                 noteDetails = noteStore.getNote(note.getGuid(), true, true, true, true);

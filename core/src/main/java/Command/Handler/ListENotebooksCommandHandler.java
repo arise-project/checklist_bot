@@ -22,7 +22,7 @@ public class ListENotebooksCommandHandler implements IStorageCommandHandler<List
 
     @Override
     public void handle(ListENotebooksCommand listENotebooksCommand) {
-        System.out.println("list everynote notebooks");
+        System.out.println("notebooks:");
         ArrayList<ENotebook> notebooks = everynoteService.listNotebooks();
         for (ENotebook notebook : notebooks)
         {

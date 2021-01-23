@@ -30,11 +30,11 @@ public class AppController implements IAppController {
             System.out.println("set_battr [node_name] #set named attribute to True.");
             System.out.println("reset_attr [node_name] #reset named attribute.");
             System.out.println("connect_everynote #connect with 'everynote' token env  variable");
-            System.out.println("read_enote #read note by name from connected everynote");
+            System.out.println("read_enote [note_name] #read note by name from connected everynote");
             System.out.println("list_enotebooks #list all notebooks from connected everynote");
             System.out.println("list_all_enotes #list all notes from connected everynote");
             System.out.println("everynote_production #enable everynote connect to production");
-            System.out.println("list_enotes_for_notebook #list notebook notes from connected everynote");
+            System.out.println("list_enotes_for_notebook [notebook_name] #list notebook notes from connected everynote");
             System.out.println();
             System.out.println("Commands works in sequence: command1 [parameter] command2 [parameter1] [parameter2] command3");
             return;
@@ -47,67 +47,92 @@ public class AppController implements IAppController {
             String commandName = args[argIndex];
             switch (commandName) {
                 case "read_text_file":
+                    System.out.println(">>>>>>>>");
                     System.out.println("read_text_file: " + args[argIndex + 2] + " name: " + args[argIndex + 1]);
+                    System.out.println(">>>>>>>>");
 					command = new ReadTextFileCommand();
 					command.setAttributes(Arrays.copyOfRange(args, argIndex + 1, argIndex + 3));
                     argIndex += 2;
                     break;
                 case "statistics":
+                    System.out.println(">>>>>>>>");
+                    System.out.println("statistics");
+                    System.out.println(">>>>>>>>");
 					command = new StatisticsCommand();
                     break;
                 case "open_storage":
+                    System.out.println(">>>>>>>>");
                     System.out.println("open_storage: " + args[argIndex + 1]);
+                    System.out.println(">>>>>>>>");
 					command = new OpenStorageCommand();
 					command.setAttributes(Arrays.copyOfRange(args, argIndex + 1, argIndex + 2));
                     argIndex++;
                     break;
                 case "save_storage":
+                    System.out.println(">>>>>>>>");
                     System.out.println("save_storage: " + args[argIndex + 1]);
+                    System.out.println(">>>>>>>>");
 					command = new SaveStorageCommand();
 					command.setAttributes(Arrays.copyOfRange(args, argIndex + 1, argIndex + 2));
 					argIndex++;
 					break;
                 case "set_battr":
+                    System.out.println(">>>>>>>>");
                     System.out.println("set_battr: " + args[argIndex + 1]);
+                    System.out.println(">>>>>>>>");
 					command = new SetBAttrCommand();
 					command.setAttributes(Arrays.copyOfRange(args, argIndex + 1, argIndex + 3));
 					argIndex+=2;
                     break;
                 case "reset_attr":
+                    System.out.println(">>>>>>>>");
                     System.out.println("reset_attr: " + args[argIndex + 1]);
+                    System.out.println(">>>>>>>>");
 					command = new ResetAttrCommand();
 					command.setAttributes(Arrays.copyOfRange(args, argIndex + 1, argIndex + 2));
 					argIndex++;
                     break;
                 case "connect_everynote":
-                    System.out.println("connect_everynote: ");
+                    System.out.println(">>>>>>>>");
+                    System.out.println("connect_everynote");
+                    System.out.println(">>>>>>>>");
                     if(System.getenv("everynote") == null){
-                        System.out.println("set env variable everynote with auth token");
+                        System.out.println("ERROR: set env variable everynote with auth token");
                     }
                     else {
                         command = new ConnectEverynoteCommand();
                     }
                     break;
                 case "read_enote":
+                    System.out.println(">>>>>>>>");
                     System.out.println("read_enote: name: " + args[argIndex + 1]);
+                    System.out.println(">>>>>>>>");
                     command = new ReadENoteCommand();
                     command.setAttributes(Arrays.copyOfRange(args, argIndex + 1, argIndex + 2));
                     argIndex += 1;
                     break;
                 case "list_enotebooks":
-                    System.out.println("list_enotebooks:");
+                    System.out.println(">>>>>>>>");
+                    System.out.println("list_enotebooks");
+                    System.out.println(">>>>>>>>");
                     command = new ListENotebooksCommand();
                     break;
                 case "list_all_enotes":
-                    System.out.println("list_all_enotes:");
+                    System.out.println(">>>>>>>>");
+                    System.out.println("list_all_enotes");
+                    System.out.println(">>>>>>>>");
                     command = new ListAllENotesCommand();
                     break;
                 case "everynote_production":
-                    System.out.println("everynote_production:");
+                    System.out.println(">>>>>>>>");
+                    System.out.println("everynote_production");
+                    System.out.println(">>>>>>>>");
                     command = new EverynoteProductionCommand();
                     break;
                 case "list_enotes_for_notebook":
+                    System.out.println(">>>>>>>>");
                     System.out.println("list_enotes_for_notebook: name: " + args[argIndex + 1]);
+                    System.out.println(">>>>>>>>");
                     command = new ListENotesForNotebookCommand();
                     command.setAttributes(Arrays.copyOfRange(args, argIndex + 1, argIndex + 2));
                     argIndex += 1;

@@ -26,7 +26,7 @@ public class TextService implements ITextService {
 
 	@Override
 	public void parseENote(Root root, ENote note) {
-		ArrayList<Node> nodes = parser.parseTextFile(note.getContent());
+		ArrayList<Node> nodes = parser.parseText(note.getContent());
 		root.setNodes(nodes);
 	}
 }

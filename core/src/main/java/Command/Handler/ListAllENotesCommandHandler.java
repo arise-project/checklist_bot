@@ -9,7 +9,7 @@ import Domain.Everynote.ENotebook;
 import Service.Interface.IEverynoteService;
 import com.google.inject.Inject;
 
-import java.util.ArrayList;
+import java.util.*;
 
 public class ListAllENotesCommandHandler implements IStorageCommandHandler<ListAllENotesCommand> {
     private final IEverynoteService everynoteService;
@@ -21,15 +21,16 @@ public class ListAllENotesCommandHandler implements IStorageCommandHandler<ListA
 
     @Override
     public void handle(ListAllENotesCommand listAllENotesCommand) {
-        System.out.println("list everynote notes");
+        System.out.println("notes:");
         ArrayList<ENotebook> notebooks = everynoteService.listNotebooks();
         ArrayList<ENote> notes = everynoteService.listAllNotes();
+        notes.sort(Comparator.comparing(ENote::getUpdated, Collections.reverseOrder()));
         for (ENote note : notes)
         {
             System.out.println("=========");
             System.out.println(note.getTitle());
-            System.out.println(note.getUpdated());
-            System.out.println(note.getCreated());
+            System.out.println("updated: "+new Date(note.getUpdated()).toString());
+            System.out.println("created: "+new Date(note.getCreated()).toString());
             for(ENotebook notebook : notebooks)
             {
                 if(notebook.getGuid() == note.getNotebookGuid())

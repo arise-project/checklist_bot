@@ -1,5 +1,6 @@
 package Command;
 
+import Command.Handler.EverynoteProductionCommandHandler;
 import Command.Handler.Interface.IStorageCommandHandler;
 import Command.Interface.IStorageCommand;
 import Command.Interface.IStorageCommandBus;
@@ -19,7 +20,12 @@ public class StorageCommandBus implements IStorageCommandBus {
             IStorageCommandHandler<SaveStorageCommand> saveStorageCommandHandler,
             IStorageCommandHandler<SetBAttrCommand> setBAttrCommandHandler,
             IStorageCommandHandler<StatisticsCommand> statisticsCommandHandler,
-            IStorageCommandHandler<ConnectEverynoteCommand> connectEverynoteCommandHandler){
+            IStorageCommandHandler<ConnectEverynoteCommand> connectEverynoteCommandHandler,
+            IStorageCommandHandler<EverynoteProductionCommand> everynoteProductionCommand,
+            IStorageCommandHandler<ListAllENotesCommand> listAllENotesCommand,
+            IStorageCommandHandler<ListENotebooksCommand> listENotebooksCommand,
+            IStorageCommandHandler<ListENotesForNotebookCommand> listENotesForNotebookCommand,
+            IStorageCommandHandler<ReadENoteCommand> readENoteCommand){
         RegisterCommandHandler(openStorageCommandHandler);
         RegisterCommandHandler(readTextFileCommandHandler);
         RegisterCommandHandler(resetAttrCommandHandler);
@@ -27,6 +33,11 @@ public class StorageCommandBus implements IStorageCommandBus {
         RegisterCommandHandler(setBAttrCommandHandler);
         RegisterCommandHandler(statisticsCommandHandler);
         RegisterCommandHandler(connectEverynoteCommandHandler);
+        RegisterCommandHandler(everynoteProductionCommand);
+        RegisterCommandHandler(listAllENotesCommand);
+        RegisterCommandHandler(listENotebooksCommand);
+        RegisterCommandHandler(listENotesForNotebookCommand);
+        RegisterCommandHandler(readENoteCommand);
     }
 
     public <TCommand extends IStorageCommand> void Dispatch(TCommand command)
