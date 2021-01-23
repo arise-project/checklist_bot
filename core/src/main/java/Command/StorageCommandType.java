@@ -9,5 +9,6 @@ public enum StorageCommandType {
     ResetAttr,
     ConnectEverynote,
     ReadENote,
-    ListENotebooks
+    ListENotebooks,
+    ListAllENotes
 }
