@@ -32,6 +32,7 @@ public class BasicModule extends AbstractModule {
         bind(new TypeLiteral<IStorageCommandHandler<SetBAttrCommand>>() {}).to(SetBAttrCommandHandler.class);
         bind(new TypeLiteral<IStorageCommandHandler<StatisticsCommand>>() {}).to(StatisticsCommandHandler.class);
         bind(new TypeLiteral<IStorageCommandHandler<ConnectEverynoteCommand>>() {}).to(ConnectEverynoteCommandHandler.class);
+        bind(new TypeLiteral<IStorageCommandHandler<ReadENoteCommand>>() {}).to(ReadENoteCommandHandler.class);
 
         bind(IStorageCommandBus.class).to(StorageCommandBus.class);
 
@@ -42,7 +43,7 @@ public class BasicModule extends AbstractModule {
         bind(ITreeMerger.class).to(TreeMerger.class);
         bind(IParagraphTextParser.class).to(ParagraphTextParser.class);
         bind(IMergeService.class).to(MergeService.class);
-        //bind(IDriveService.class).to(DriveService.class);
+        bind(IDriveService.class).to(DriveService.class);
         bind(IEverynoteService.class).to(EverynoteService.class).asEagerSingleton();
     }
 }

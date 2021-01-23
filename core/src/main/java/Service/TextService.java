@@ -1,5 +1,6 @@
 package Service;
 
+import Domain.Everynote.ENote;
 import Domain.Node;
 import Domain.Root;
 import Parser.Interface.IParagraphTextParser;
@@ -20,6 +21,12 @@ public class TextService implements ITextService {
 	@Override
 	public void parseTextFile(Root root, String fileName) {
 		ArrayList<Node> nodes = parser.parseTextFile(fileName);
+		root.setNodes(nodes);
+	}
+
+	@Override
+	public void parseENote(Root root, ENote note) {
+		ArrayList<Node> nodes = parser.parseTextFile(note.getContent());
 		root.setNodes(nodes);
 	}
 }
