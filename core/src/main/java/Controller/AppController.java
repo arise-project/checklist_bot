@@ -31,6 +31,7 @@ public class AppController implements IAppController {
             System.out.println("reset_attr [node_name] #reset named attribute.");
             System.out.println("connect_everynote #connect with 'everynote' token env  variable");
             System.out.println("read_enote #read note by name from connected everynote");
+            System.out.println("list_enotebooks #list all notebooks from connected everynote");
             System.out.println();
             System.out.println("Commands works in sequence: command1 [parameter] command2 [parameter1] [parameter2] command3");
             return;
@@ -89,6 +90,10 @@ public class AppController implements IAppController {
                     command = new ReadENoteCommand();
                     command.setAttributes(Arrays.copyOfRange(args, argIndex + 1, argIndex + 2));
                     argIndex += 1;
+                    break;
+                case "list_enotebooks":
+                    System.out.println("list_enotebooks:");
+                    command = new ListENotebooksCommand();
                     break;
             }
             argIndex++;

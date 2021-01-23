@@ -3,7 +3,6 @@ package Command.Handler;
 import Algorithm.Interface.ITreeMerger;
 import Command.Handler.Interface.IStorageCommandHandler;
 import Command.ReadENoteCommand;
-import Command.ReadTextFileCommand;
 import Command.StorageCommandType;
 import Domain.Everynote.ENote;
 import Domain.Root;
@@ -39,7 +38,7 @@ public class ReadENoteCommandHandler implements IStorageCommandHandler<ReadENote
         readENoteCommand.getRoot().setName(readENoteCommand.getName());
         Root newRoot = new Root();
         newRoot.setName(readENoteCommand.getName());
-        ENote note = everynoteService.searchNotes(readENoteCommand.getName());
+        ENote note = everynoteService.searchNote(readENoteCommand.getName());
         text.parseENote(newRoot, note);
         if(readENoteCommand.getRoot().getNodes().size() > 0)
         {
@@ -53,6 +52,6 @@ public class ReadENoteCommandHandler implements IStorageCommandHandler<ReadENote
 
     @Override
     public StorageCommandType getType() {
-        return StorageCommandType.ReadTextFile;
+        return StorageCommandType.ReadENote;
     }
 }

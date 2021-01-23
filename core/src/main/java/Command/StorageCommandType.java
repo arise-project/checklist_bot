@@ -8,5 +8,6 @@ public enum StorageCommandType {
     SetBAttr,
     ResetAttr,
     ConnectEverynote,
-    ReadENote
+    ReadENote,
+    ListENotebooks
 }

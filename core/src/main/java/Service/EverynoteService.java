@@ -169,7 +169,7 @@ public class EverynoteService implements Service.Interface.IEverynoteService {
      * Search a user's notes and display the results.
      */
     @Override
-    public ENote searchNotes(String title) {
+    public ENote searchNote(String title) {
         // Searches are formatted according to the Evernote search grammar.
         // Learn more at
         // https://dev.evernote.com/doc/articles/search_grammar.php
