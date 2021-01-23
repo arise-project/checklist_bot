@@ -170,6 +170,93 @@ public class EverynoteService implements Service.Interface.IEverynoteService {
         return result;
     }
 
+    @Override
+    public ArrayList<ENote> listNotes(ENotebook parent) {
+        List<Notebook> notebooks;
+        try{
+            notebooks = noteStore.listNotebooks();
+        } catch (TException | EDAMUserException | EDAMSystemException e) {
+            err.println(e.getMessage());
+            return null;
+        }
+        ArrayList<ENote> result = new ArrayList<>();
+        Notebook notebook = null;
+        for (Notebook n : notebooks) {
+            if(n.getGuid() == parent.getGuid()) {
+                notebook = n;
+                break;
+            }
+        }
+
+        if(notebook == null) {
+            out.println("NOT FOUND");
+            return result;
+        }
+
+        out.println("Notebook: " + notebook.getName());
+
+        // Next, search for the first 100 notes in this notebook, ordering
+        // by creation date
+        NoteFilter filter = new NoteFilter();
+        filter.setNotebookGuid(notebook.getGuid());
+        filter.setOrder(NoteSortOrder.UPDATED.getValue());
+        filter.setAscending(false);
+
+        NoteList noteList;
+        try{
+            noteList = noteStore.findNotes(filter, 0, 100);
+        } catch (EDAMSystemException | EDAMNotFoundException | EDAMUserException | TException e) {
+            err.println(e.getMessage());
+            return null;
+        }
+
+        List<Note> notes = noteList.getNotes();
+
+        for (Note note : notes) {
+            out.println(" * " + note.getTitle());
+            Note noteDetails = null;
+            ENote info = null;
+            try {
+                noteDetails = noteStore.getNote(note.getGuid(), true, true, true, true);
+            } catch (EDAMSystemException | EDAMNotFoundException | EDAMUserException | TException e) {
+                err.println(e.getMessage());
+                info = new ENote(note.getGuid(), note.getNotebookGuid(),e.getMessage());
+            }
+            if(noteDetails != null){
+                int length = noteDetails.getContentLength();
+                byte[] hash = noteDetails.getContentHash();
+                long created = noteDetails.getCreated();
+                String guid = noteDetails.getGuid();
+                String notebookGuid = noteDetails.getNotebookGuid();
+                String title = noteDetails.getTitle();
+                long updated = noteDetails.getUpdated();
+                int sequenceNum = noteDetails.getUpdateSequenceNum();
+                String content;
+                try{
+                    content = new TikaService().extract(noteDetails.getContent());
+                } catch (SAXException | TikaException | IOException e) {
+                    err.println(e.getMessage());
+                    content = noteDetails.getContent();
+                }
+                info = new ENote(
+                        content,
+                        length,
+                        hash,
+                        created,
+                        guid,
+                        notebookGuid,
+                        title,
+                        updated,
+                        sequenceNum);
+            }
+
+            if(info != null) {
+                result.add(info);
+            }
+        }
+        return result;
+    }
+
     /**
      * Search a user's notes and display the results.
      */

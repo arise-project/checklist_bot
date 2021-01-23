@@ -34,6 +34,7 @@ public class AppController implements IAppController {
             System.out.println("list_enotebooks #list all notebooks from connected everynote");
             System.out.println("list_all_enotes #list all notes from connected everynote");
             System.out.println("everynote_production #enable everynote connect to production");
+            System.out.println("list_enotes_for_notebook #list notebook notes from connected everynote");
             System.out.println();
             System.out.println("Commands works in sequence: command1 [parameter] command2 [parameter1] [parameter2] command3");
             return;
@@ -104,6 +105,12 @@ public class AppController implements IAppController {
                 case "everynote_production":
                     System.out.println("everynote_production:");
                     command = new EverynoteProductionCommand();
+                    break;
+                case "list_enotes_for_notebook":
+                    System.out.println("list_enotes_for_notebook: name: " + args[argIndex + 1]);
+                    command = new ListENotesForNotebookCommand();
+                    command.setAttributes(Arrays.copyOfRange(args, argIndex + 1, argIndex + 2));
+                    argIndex += 1;
                     break;
             }
             argIndex++;

@@ -36,6 +36,7 @@ public class BasicModule extends AbstractModule {
         bind(new TypeLiteral<IStorageCommandHandler<ListENotebooksCommand>>() {}).to(ListENotebooksCommandHandler.class);
         bind(new TypeLiteral<IStorageCommandHandler<ListAllENotesCommand>>() {}).to(ListAllENotesCommandHandler.class);
         bind(new TypeLiteral<IStorageCommandHandler<EverynoteProductionCommand>>() {}).to(EverynoteProductionCommandHandler.class);
+        bind(new TypeLiteral<IStorageCommandHandler<ListENotesForNotebookCommand>>() {}).to(ListENotesCommandHandler.class);
 
         bind(IStorageCommandBus.class).to(StorageCommandBus.class);
 

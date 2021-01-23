@@ -11,5 +11,6 @@ public enum StorageCommandType {
     ReadENote,
     ListENotebooks,
     ListAllENotes,
-    EverynoteProduction
+    EverynoteProduction,
+    ListAllENotesForNotebook
 }

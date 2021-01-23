@@ -11,5 +11,8 @@ public interface IEverynoteService {
     boolean auth();
     ArrayList<ENotebook> listNotebooks();
     ArrayList<ENote> listAllNotes();
+
+    ArrayList<ENote> listNotes(ENotebook parent);
+
     ENote searchNote(String title);
 }
