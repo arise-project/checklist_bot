@@ -10,5 +10,6 @@ public enum StorageCommandType {
     ConnectEverynote,
     ReadENote,
     ListENotebooks,
-    ListAllENotes
+    ListAllENotes,
+    EverynoteProduction
 }

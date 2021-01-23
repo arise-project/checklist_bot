@@ -33,9 +33,14 @@ public class EverynoteService implements Service.Interface.IEverynoteService {
 
     private boolean isSandbox = true;
 
-    public void EnableProduction()
+    public void enableProduction()
     {
         isSandbox = false;
+    }
+
+    @Override
+    public boolean isProduction() {
+        return !isSandbox;
     }
 
     @Override

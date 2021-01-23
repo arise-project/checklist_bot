@@ -6,7 +6,8 @@ import Domain.Everynote.ENotebook;
 import java.util.ArrayList;
 
 public interface IEverynoteService {
-    void EnableProduction();
+    void enableProduction();
+    boolean isProduction();
     boolean auth();
     ArrayList<ENotebook> listNotebooks();
     ArrayList<ENote> listAllNotes();

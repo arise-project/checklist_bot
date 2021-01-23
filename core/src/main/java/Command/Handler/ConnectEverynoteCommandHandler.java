@@ -25,7 +25,7 @@ public class ConnectEverynoteCommandHandler implements IStorageCommandHandler<Co
             System.out.println("ERROR: Can not connect");
         }
         else{
-            System.out.println("DONE");
+            System.out.println("DONE:" + (everynoteService.isProduction()? "production": "sandbox"));
         }
     }
 }
