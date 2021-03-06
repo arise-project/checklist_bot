@@ -11,7 +11,6 @@ import Command.Interface.IStorageCommandBus;
 import Controller.AppController;
 import Controller.Interface.IAppController;
 import Repository.Interface.IStorageRepository;
-import Service.DriveService;
 import Service.EverynoteService;
 import Service.Interface.*;
 import Repository.StorageRepository;
@@ -47,7 +46,6 @@ public class BasicModule extends AbstractModule {
         bind(ITreeMerger.class).to(TreeMerger.class);
         bind(IParagraphTextParser.class).to(ParagraphTextParser.class);
         bind(IMergeService.class).to(MergeService.class);
-        bind(IDriveService.class).to(DriveService.class);
         bind(IEverynoteService.class).to(EverynoteService.class).asEagerSingleton();
     }
 }
