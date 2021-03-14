@@ -1,5 +1,8 @@
 # checklist_bot
 
+![bot in emulator](https://github.com/arise-project/checklist_bot/blob/master/core/examples/bot1.png?raw=true)
+
+
 ## Setup on Windows
 
 1. create oracle account
