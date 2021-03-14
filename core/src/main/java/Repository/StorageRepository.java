@@ -7,7 +7,6 @@ import java.io.IOException;
 import Algorithm.Interface.ITreeWalker;
 import Repository.Interface.IStorageRepository;
 import Domain.Node;
-import Domain.NodeAttribute;
 import Domain.Root;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -76,28 +75,7 @@ public class StorageRepository implements IStorageRepository {
 	}
 
 	@Override
-	public void addAttribute(String nodeName, NodeAttribute attribute, Root root)  {
-		Node result = walker.search(root, nodeName);
-		if(result == null) {
-			System.out.println(nodeName + " not found ");
-			return;
-		}
-
-		for(NodeAttribute a : result.getAttributes()){
-			if(a.getName().equals(attribute.getName())){
-				a.setBValue(attribute.getBValue());
-				System.out.println(nodeName + " updated attribute "+ attribute.getName() + " value "+ attribute.getBValue());
-				return;
-			}
-		}
-
-		System.out.println(nodeName + " added attribute "+ attribute.getName() + " value "+ attribute.getBValue());
-		result.getAttributes().add(attribute);
-		storageFile = null;
-	}
-
-	@Override
-	public String getStorageFile(){
+	public String getFile(){
 		if(storageFile == null){
 			return "IN_MEMORY";
 		}

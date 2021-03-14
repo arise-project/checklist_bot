@@ -1,6 +1,8 @@
 package Domain;
 
 import java.util.ArrayList;
+
+import Domain.Knowledge.Metadata.BaseMetaKB;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 
@@ -23,14 +25,14 @@ public abstract class Node {
 		Name = name;
 	}
 
-	private final ArrayList<NodeAttribute> Attributes;
-		
 	public Node(){
-		Attributes = new ArrayList<>();
+		Meta = new ArrayList<>();
 	}
-	
-	public ArrayList<NodeAttribute> getAttributes(){
-		return Attributes;
+
+	private final ArrayList<BaseMetaKB> Meta;
+
+	public ArrayList<BaseMetaKB> getMeta(){
+		return Meta;
 	}
 
 	private boolean Deleted;

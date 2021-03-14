@@ -26,9 +26,7 @@ public class BasicModule extends AbstractModule {
     protected void configure() {
         bind(new TypeLiteral<IStorageCommandHandler<OpenStorageCommand>>() {}).to(OpenStorageCommandHandler.class);
         bind(new TypeLiteral<IStorageCommandHandler<ReadTextFileCommand>>() {}).to(ReadTextFileCommandHandler.class);
-        bind(new TypeLiteral<IStorageCommandHandler<ResetAttrCommand>>() {}).to(ResetAttrCommandHandler.class);
         bind(new TypeLiteral<IStorageCommandHandler<SaveStorageCommand>>() {}).to(SaveStorageCommandHandler.class);
-        bind(new TypeLiteral<IStorageCommandHandler<SetBAttrCommand>>() {}).to(SetBAttrCommandHandler.class);
         bind(new TypeLiteral<IStorageCommandHandler<StatisticsCommand>>() {}).to(StatisticsCommandHandler.class);
         bind(new TypeLiteral<IStorageCommandHandler<ConnectEverynoteCommand>>() {}).to(ConnectEverynoteCommandHandler.class);
         bind(new TypeLiteral<IStorageCommandHandler<ReadENoteCommand>>() {}).to(ReadENoteCommandHandler.class);

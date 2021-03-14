@@ -76,14 +76,6 @@ public class AppController implements IAppController {
 					command.setAttributes(Arrays.copyOfRange(args, argIndex + 1, argIndex + 2));
 					argIndex++;
 					break;
-                case "set_battr":
-                    System.out.println(">>>>>>>>");
-                    System.out.println("set_battr: " + args[argIndex + 1]);
-                    System.out.println(">>>>>>>>");
-					command = new SetBAttrCommand();
-					command.setAttributes(Arrays.copyOfRange(args, argIndex + 1, argIndex + 3));
-					argIndex+=2;
-                    break;
                 case "reset_attr":
                     System.out.println(">>>>>>>>");
                     System.out.println("reset_attr: " + args[argIndex + 1]);

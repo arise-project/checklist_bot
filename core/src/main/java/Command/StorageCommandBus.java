@@ -18,7 +18,6 @@ public class StorageCommandBus implements IStorageCommandBus {
             IStorageCommandHandler<ReadTextFileCommand> readTextFileCommandHandler,
             IStorageCommandHandler<ResetAttrCommand> resetAttrCommandHandler,
             IStorageCommandHandler<SaveStorageCommand> saveStorageCommandHandler,
-            IStorageCommandHandler<SetBAttrCommand> setBAttrCommandHandler,
             IStorageCommandHandler<StatisticsCommand> statisticsCommandHandler,
             IStorageCommandHandler<ConnectEverynoteCommand> connectEverynoteCommandHandler,
             IStorageCommandHandler<EverynoteProductionCommand> everynoteProductionCommand,
@@ -30,7 +29,6 @@ public class StorageCommandBus implements IStorageCommandBus {
         RegisterCommandHandler(readTextFileCommandHandler);
         RegisterCommandHandler(resetAttrCommandHandler);
         RegisterCommandHandler(saveStorageCommandHandler);
-        RegisterCommandHandler(setBAttrCommandHandler);
         RegisterCommandHandler(statisticsCommandHandler);
         RegisterCommandHandler(connectEverynoteCommandHandler);
         RegisterCommandHandler(everynoteProductionCommand);
