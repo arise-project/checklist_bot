@@ -4,21 +4,17 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import Algorithm.Interface.ITreeWalker;
 import Repository.Interface.IStorageRepository;
-import Domain.Node;
 import Domain.Root;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.google.inject.Inject;
 
 public class StorageRepository implements IStorageRepository {
-	private final ITreeWalker walker;
 	private String storageFile;
 
 	@Inject
-	public StorageRepository(ITreeWalker walker){
-		this.walker = walker;
+	public StorageRepository(){
 	}
 
 	@Override
