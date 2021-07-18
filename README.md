@@ -24,13 +24,36 @@ C:\Program Files\Java\jdk-11.0.10\bin
 
 6. Download Gradle binary
 
+6.1 Windows
+
 https://gradle.org/releases/
 
-7. Copy Gradle content to c:\Gradle
+Copy Gradle content to c:\Gradle
 
-8. Add gradle bin to PATH environment variable
+Add gradle bin to PATH environment variable
 
 C:\Gradle\bin
+
+6.2 Ubuntu 21.04
+
+VERSION=6.5.1
+wget https://services.gradle.org/distributions/gradle-${VERSION}-bin.zip -P /tmp
+
+sudo unzip -d /opt/gradle /tmp/gradle-${VERSION}-bin.zip
+
+sudo ln -s /opt/gradle/gradle-${VERSION} /opt/gradle/latest
+
+sudo nano /etc/profile.d/gradle.sh
+
+/etc/profile.d/gradle.sh
+
+export GRADLE_HOME=/opt/gradle/latest
+export PATH=${GRADLE_HOME}/bin:${PATH}
+
+
+sudo chmod +x /etc/profile.d/gradle.sh
+
+source /etc/profile.d/gradle.sh
 
 9. Install nodejs
 
