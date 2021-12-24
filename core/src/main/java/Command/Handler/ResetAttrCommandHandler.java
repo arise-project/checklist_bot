@@ -2,8 +2,8 @@ package Command.Handler;
 
 import Command.Handler.Interface.IStorageCommandHandler;
 import Command.ResetAttrCommand;
+import Command.SaveStorageCommand;
 import Command.StorageCommandType;
-import Domain.NodeAttribute;
 import Repository.Interface.IStorageRepository;
 import com.google.inject.Inject;
 
@@ -17,12 +17,7 @@ public class ResetAttrCommandHandler implements IStorageCommandHandler<ResetAttr
 
     @Override
     public void handle(ResetAttrCommand resetAttrCommand) {
-        if(resetAttrCommand.getRoot() != null) {
-            NodeAttribute a = new NodeAttribute();
-            a.setName(resetAttrCommand.getName());
-            a.setBValue(null);
-            storage.addAttribute(resetAttrCommand.getNodeName(), a, resetAttrCommand.getRoot());
-        }
+        //TODO
     }
 
     @Override

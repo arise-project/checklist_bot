@@ -1,6 +1,5 @@
 package Repository.Interface;
 
-import Domain.NodeAttribute;
 import Domain.Root;
 
 public interface IStorageRepository {
@@ -8,7 +7,5 @@ public interface IStorageRepository {
 
     Root open(String filePath);
 
-    void addAttribute(String nodeName, NodeAttribute attribute, Root root);
-
-    String getStorageFile();
+    String getFile();
 }

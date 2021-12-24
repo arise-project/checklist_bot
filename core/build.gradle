@@ -14,29 +14,28 @@ plugins {
     id 'application'
 
     id 'eclipse'
+
+    id 'java-library'
 }
 
 // Define the main class for the application
-mainClassName = 'App'
 
 dependencies {
     // This dependency is found on compile classpath of this component and consumers.
-    compile 'com.google.guava:guava:23.0'
     compile 'org.json:json:20190722'
     compile 'com.fasterxml.jackson.core:jackson-core:2.10.2'
     compile 'com.fasterxml.jackson.core:jackson-annotations:2.10.2'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.10.2'
     compile 'com.google.inject:guice:4.2.3'
     compile 'info.debatty:java-string-similarity:1.2.1'
-    compile 'com.google.api-client:google-api-client:1.23.0'
-    compile 'com.google.oauth-client:google-oauth-client-jetty:1.23.0'
-    compile 'com.google.apis:google-api-services-drive:v3-rev110-1.23.0'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.12.0-rc2'
     compile 'com.fasterxml.jackson.core:jackson-core:2.12.0-rc2'
     compile 'com.evernote:evernote-api:1.25.1'
     compile 'org.apache.tika:tika-core:1.24.1'
     compile 'org.apache.tika:tika-parsers:1.24.1'
     compile 'org.apache.tika:tika:1.24.1'
+    compile 'com.google.guava:guava:23.6-jre'
+    compile 'org.apache.httpcomponents:httpcore:4.4.8'
 
     // Use JUnit test framework
     testCompile 'junit:junit:4.12'
@@ -54,14 +53,21 @@ repositories {
 version = '1.0'
 sourceCompatibility = '11'
 targetCompatibility = '11'
+mainClassName = 'App'
 
-task fatJar (type: Jar) {
-	manifest {
-		attributes 'Implementation-Title' : 'checklist bot',
-		'Implementation-Version' : version,
-		'Main-Class' : mainClassName
-	}
-	baseName = project.name + '-all'
-	from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
-	with jar
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'App'
+        )
+    }
+
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+
+    exclude 'META-INF/*.RSA'
+    exclude 'META-INF/*.SF'
+    exclude 'META-INF/*.DSA'
 }

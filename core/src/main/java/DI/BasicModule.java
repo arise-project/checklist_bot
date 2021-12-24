@@ -11,7 +11,6 @@ import Command.Interface.IStorageCommandBus;
 import Controller.AppController;
 import Controller.Interface.IAppController;
 import Repository.Interface.IStorageRepository;
-import Service.DriveService;
 import Service.EverynoteService;
 import Service.Interface.*;
 import Repository.StorageRepository;
@@ -27,9 +26,7 @@ public class BasicModule extends AbstractModule {
     protected void configure() {
         bind(new TypeLiteral<IStorageCommandHandler<OpenStorageCommand>>() {}).to(OpenStorageCommandHandler.class);
         bind(new TypeLiteral<IStorageCommandHandler<ReadTextFileCommand>>() {}).to(ReadTextFileCommandHandler.class);
-        bind(new TypeLiteral<IStorageCommandHandler<ResetAttrCommand>>() {}).to(ResetAttrCommandHandler.class);
         bind(new TypeLiteral<IStorageCommandHandler<SaveStorageCommand>>() {}).to(SaveStorageCommandHandler.class);
-        bind(new TypeLiteral<IStorageCommandHandler<SetBAttrCommand>>() {}).to(SetBAttrCommandHandler.class);
         bind(new TypeLiteral<IStorageCommandHandler<StatisticsCommand>>() {}).to(StatisticsCommandHandler.class);
         bind(new TypeLiteral<IStorageCommandHandler<ConnectEverynoteCommand>>() {}).to(ConnectEverynoteCommandHandler.class);
         bind(new TypeLiteral<IStorageCommandHandler<ReadENoteCommand>>() {}).to(ReadENoteCommandHandler.class);
@@ -37,6 +34,7 @@ public class BasicModule extends AbstractModule {
         bind(new TypeLiteral<IStorageCommandHandler<ListAllENotesCommand>>() {}).to(ListAllENotesCommandHandler.class);
         bind(new TypeLiteral<IStorageCommandHandler<EverynoteProductionCommand>>() {}).to(EverynoteProductionCommandHandler.class);
         bind(new TypeLiteral<IStorageCommandHandler<ListENotesForNotebookCommand>>() {}).to(ListENotesCommandHandler.class);
+        bind(new TypeLiteral<IStorageCommandHandler<ResetAttrCommand>>() {}).to(ResetAttrCommandHandler.class);
 
         bind(IStorageCommandBus.class).to(StorageCommandBus.class);
 
@@ -47,7 +45,6 @@ public class BasicModule extends AbstractModule {
         bind(ITreeMerger.class).to(TreeMerger.class);
         bind(IParagraphTextParser.class).to(ParagraphTextParser.class);
         bind(IMergeService.class).to(MergeService.class);
-        bind(IDriveService.class).to(DriveService.class);
         bind(IEverynoteService.class).to(EverynoteService.class).asEagerSingleton();
     }
 }

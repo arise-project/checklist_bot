@@ -1,6 +1,8 @@
 package Domain;
 
 import java.util.ArrayList;
+
+import Domain.Knowledge.Metadata.*;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 
@@ -9,8 +11,12 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 		property = "type"
 )
 @JsonSubTypes({
-	@JsonSubTypes.Type( value = Note.class, name = "note" ),
-	@JsonSubTypes.Type( value = Paragraph.class, name = "paragraph" )
+		@JsonSubTypes.Type( value = Note.class, name = "note" ),
+		@JsonSubTypes.Type( value = Paragraph.class, name = "paragraph" ),
+		@JsonSubTypes.Type( value = BoolMetaBK.class, name = "boolMeta" ),
+		@JsonSubTypes.Type( value = IntMetaKB.class, name = "intMeta" ),
+		@JsonSubTypes.Type( value = StringMetaKB.class, name = "stringMeta" ),
+		@JsonSubTypes.Type( value = RefMetaKB.class, name = "refMeta" )
 })
 public abstract class Node {
 	private String Name;
@@ -23,14 +29,14 @@ public abstract class Node {
 		Name = name;
 	}
 
-	private final ArrayList<NodeAttribute> Attributes;
-		
 	public Node(){
-		Attributes = new ArrayList<>();
+		Meta = new ArrayList<>();
 	}
-	
-	public ArrayList<NodeAttribute> getAttributes(){
-		return Attributes;
+
+	private final ArrayList<BaseMetaKB> Meta;
+
+	public ArrayList<BaseMetaKB> getMeta(){
+		return Meta;
 	}
 
 	private boolean Deleted;
