@@ -6,3 +6,4 @@ https://datasaur.ai/ Free Apply 5,000 labels/mo
 [Find anything blazingly fast with Google's vector search technology](https://cloud.google.com/blog/topics/developers-practitioners/find-anything-blazingly-fast-googles-vector-search-technology)
 [java language](https://advancedweb.hu/new-language-features-since-java-8-to-17/)
 [Generic Life Activity Data Organization System (GLADOS)](https://github.com/kaustubh-karkare/glados)
+[Dicio assistant](https://github.com/Stypox/dicio-android)
