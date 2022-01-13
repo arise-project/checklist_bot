@@ -7,3 +7,4 @@ https://datasaur.ai/ Free Apply 5,000 labels/mo
 [java language](https://advancedweb.hu/new-language-features-since-java-8-to-17/)
 [Generic Life Activity Data Organization System (GLADOS)](https://github.com/kaustubh-karkare/glados)
 [Dicio assistant](https://github.com/Stypox/dicio-android)
+[Cherche (search in French) allows you to create a neural search pipeline using retrievers and pre-trained language models as rankers](https://github.com/raphaelsty/cherche)
