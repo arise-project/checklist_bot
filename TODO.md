@@ -8,3 +8,7 @@ https://datasaur.ai/ Free Apply 5,000 labels/mo
 [Generic Life Activity Data Organization System (GLADOS)](https://github.com/kaustubh-karkare/glados)
 [Dicio assistant](https://github.com/Stypox/dicio-android)
 [Cherche (search in French) allows you to create a neural search pipeline using retrievers and pre-trained language models as rankers](https://github.com/raphaelsty/cherche)
+[Dynamic Table of Contents Using Recursion Trees](https://ryan-schachte.com/posts/dynamic-table-of-contents-using-recursion-trees)
+[Category Theory: Lecture Notes and Online Books](https://www.logicmatters.net/categories/)
+[Handbook of Graph Drawing and Visualization](https://cs.brown.edu/people/rtamassi/gdhandbook/)
+[Silero VAD - pre-trained enterprise-grade Voice Activity Detector (also see our STT models).](https://github.com/snakers4/silero-vad)
