@@ -12,3 +12,7 @@ https://datasaur.ai/ Free Apply 5,000 labels/mo
 [Category Theory: Lecture Notes and Online Books](https://www.logicmatters.net/categories/)
 [Handbook of Graph Drawing and Visualization](https://cs.brown.edu/people/rtamassi/gdhandbook/)
 [Silero VAD - pre-trained enterprise-grade Voice Activity Detector (also see our STT models).](https://github.com/snakers4/silero-vad)
+[The Spacing Effect: How to Improve Learning and Maximize Retention](https://fs.blog/spacing-effect/)
+[Ask HN: Do you also feel you retain nothing after reading a technical book?](https://news.ycombinator.com/item?id=30047138)
+[Huginn is a system for building agents that perform automated tasks for you online.](https://github.com/huginn/huginn)
+[Ask HN: How Do You Budget?](https://news.ycombinator.com/item?id=30052504)
