@@ -16,3 +16,5 @@ https://datasaur.ai/ Free Apply 5,000 labels/mo
 [Ask HN: Do you also feel you retain nothing after reading a technical book?](https://news.ycombinator.com/item?id=30047138)
 [Huginn is a system for building agents that perform automated tasks for you online.](https://github.com/huginn/huginn)
 [Ask HN: How Do You Budget?](https://news.ycombinator.com/item?id=30052504)
+[Competitors](https://windi.app/)
+[Competitors](https://github.com/Roznoshchik/Lurnby)
