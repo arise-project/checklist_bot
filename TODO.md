@@ -18,3 +18,4 @@ https://datasaur.ai/ Free Apply 5,000 labels/mo
 [Ask HN: How Do You Budget?](https://news.ycombinator.com/item?id=30052504)
 [Competitors](https://windi.app/)
 [Competitors](https://github.com/Roznoshchik/Lurnby)
+[The simple system I’m using to stay in touch with hundreds of people](https://jakobgreenfeld.com/stay-in-touch)
