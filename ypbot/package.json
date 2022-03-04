@@ -18,7 +18,7 @@
     "dependencies": {
         "botbuilder": "~4.14.1",
         "dotenv": "^8.6.0",
-        "restify": "~8.6.0"
+        "restify": "~8.6.1"
     },
     "devDependencies": {
         "eslint": "^7.0.0",
