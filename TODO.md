@@ -24,3 +24,5 @@ https://datasaur.ai/ Free Apply 5,000 labels/mo
 [static analyser](https://fbinfer.com/)
 [How I learned to stop worrying and structure all writing as a list](https://dynomight.net/lists/)
 [Show HN: A plain-text file format for todos and check lists](https://news.ycombinator.com/item?id=30879327)
+[Human Brain Compresses Working Memories into Low-Res ‘Summaries’
+](https://directorsblog.nih.gov/2022/04/12/human-brain-compresses-working-memories-into-low-res-summaries/)
