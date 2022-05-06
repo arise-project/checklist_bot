@@ -12,46 +12,62 @@ class ChecklistBot extends ActivityHandler {
         this.onMessage(async (context, next) => {
             const replyText = `Echo: ${context.activity.text}`;
 
-            var prc = spawn('java', ['-jar', '-Xmx512M', '-Dfile.encoding=utf8', '../core/build/libs/checklist_bot-all-1.0.jar']);
-
-            //noinspection JSUnresolvedFunction
-            var strs = [];
-            prc.stdout.setEncoding('utf8');
-            prc.stdout.on('data', function (data) {
-                var str = data.toString()
-                
-                var lines = str.split(/(\r?\n)/g);
-                console.log(lines.join(""));
-                var count = 0;
-                var buff = '';
-                for(var i =0; i < lines.length;i++)
-                {
-                    buff += lines[i] + '\n';
-
-                    if(count++ > 5 || i == lines.length - 1)
-                    {
-                        strs.push(buff);
-                        buff = '';
-                        count = 0;
-                    }
-                }
-                str = lines.join("\n");
-            });
-
-            prc.on('close', function (code) {
-                if(code != 0)
-                {
-                    console.log('process exit code ' + code);
-                }
-            });
-
-            await new Promise(resolve => setTimeout(() => resolve(                
-            ), 1000));
-
-            for(var i =0; i < strs.length;i++)
+            try
             {
-                await context.sendActivity(MessageFactory.text(strs[i], strs[i]));
+                var prc = spawn(
+                    'gradle', 
+                    [
+                        'run'
+                    ], 
+                    {
+                        cwd: '../core'
+                    });
+    
+                //noinspection JSUnresolvedFunction
+                var strs = [];
+                prc.stdout.setEncoding('utf8');
+                prc.stdout.on('data', function (data) {
+                    var str = data.toString()
+                    
+                    var lines = str.split(/(\r?\n)/g);
+                    console.log(lines.join(""));
+                    var count = 0;
+                    var buff = '';
+                    for(var i =0; i < lines.length;i++)
+                    {
+                        buff += lines[i] + '\n';
+    
+                        if(count++ > 5 || i == lines.length - 1)
+                        {
+                            strs.push(buff);
+                            buff = '';
+                            count = 0;
+                        }
+                    }
+                    str = lines.join("\n");
+                });
+    
+                prc.on('close', function (code) {
+                    if(code != 0)
+                    {
+                        console.log('process exit code ' + code);
+                    }
+                });
+    
+                await new Promise(resolve => setTimeout(() => resolve(                
+                ), 1000));
+    
+                for(var i =0; i < strs.length;i++)
+                {
+                    await context.sendActivity(MessageFactory.text(strs[i], strs[i]));
+                }
             }
+            catch(e)
+            {
+                console.log(e);
+            }
+
+            
             
 
             // By calling next() you ensure that the next BotHandler is run.
