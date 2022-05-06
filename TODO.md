@@ -26,3 +26,5 @@ https://datasaur.ai/ Free Apply 5,000 labels/mo
 [Show HN: A plain-text file format for todos and check lists](https://news.ycombinator.com/item?id=30879327)
 [Human Brain Compresses Working Memories into Low-Res ‘Summaries’
 ](https://directorsblog.nih.gov/2022/04/12/human-brain-compresses-working-memories-into-low-res-summaries/)
+https://plutoapp.xyz/blog/post/designing-a-command-palette/
+https://www.gamedeveloper.com/blogs/the-ai-of-doom-1993
