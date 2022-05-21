@@ -28,3 +28,4 @@ https://datasaur.ai/ Free Apply 5,000 labels/mo
 ](https://directorsblog.nih.gov/2022/04/12/human-brain-compresses-working-memories-into-low-res-summaries/)
 https://plutoapp.xyz/blog/post/designing-a-command-palette/
 https://www.gamedeveloper.com/blogs/the-ai-of-doom-1993
+https://dashy.to/
