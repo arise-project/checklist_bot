@@ -2,6 +2,7 @@
 
 ![bot in emulator](https://github.com/arise-project/checklist_bot/blob/master/core/examples/bot1.png?raw=true)
 
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/epirogov)
 
 ## Setup on Windows
 
