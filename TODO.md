@@ -30,3 +30,4 @@ https://datasaur.ai/ Free Apply 5,000 labels/mo
 https://plutoapp.xyz/blog/post/designing-a-command-palette/
 https://www.gamedeveloper.com/blogs/the-ai-of-doom-1993
 https://dashy.to/
+[Whisper is a general-purpose speech recognition model. It is trained on a large dataset of diverse audio and is also a multi-task model that can perform multilingual speech recognition as well as speech translation and language identification.](https://github.com/openai/whisper)
