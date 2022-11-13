@@ -1,5 +1,6 @@
 git push https://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@github.com/arise-project/checklist_bot.git
 
+[Code Annotation](https://github.com/thamara/vscode-code-annotation)
 [Ask HN: What is a sustainable methodology for taking notes of your learning?](https://news.ycombinator.com/item?id=32211734)
 [Find anything blazingly fast with Google's vector search technology](https://cloud.google.com/blog/topics/developers-practitioners/find-anything-blazingly-fast-googles-vector-search-technology)
 [Chokidar 3: How to save 32TB of traffic every week with one NPM package](https://paulmillr.com/posts/chokidar-3-save-32tb-of-traffic/)
