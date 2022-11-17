@@ -1,5 +1,6 @@
 git push https://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@github.com/arise-project/checklist_bot.git
 
+[Formal Logic!](https://www.fecundity.com/logic/download.html)
 [Code Annotation](https://github.com/thamara/vscode-code-annotation)
 https://structpad.app/storage
 [CLI tool and python library that converts the output of popular command-line tools, file-types, and common strings to JSON, YAML, or Dictionaries. This allows piping of output to tools like jq and simplifying automation scripts.](https://kellyjonbrazil.github.io/jc/)
