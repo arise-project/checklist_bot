@@ -1,5 +1,6 @@
 [High-performance inference of OpenAI's Whisper automatic speech recognition (ASR) model:](https://github.com/ggerganov/whisper.cpp)
 
+[symantic search](https://sachaarbonel.medium.com/how-to-build-a-semantic-search-engine-in-rust-e96e6378cfd9)
 [Formal Logic!](https://www.fecundity.com/logic/download.html)
 [Code Annotation](https://github.com/thamara/vscode-code-annotation)
 https://structpad.app/storage
