@@ -1,4 +1,4 @@
-git push https://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@github.com/arise-project/checklist_bot.git
+[High-performance inference of OpenAI's Whisper automatic speech recognition (ASR) model:](https://github.com/ggerganov/whisper.cpp)
 
 [Formal Logic!](https://www.fecundity.com/logic/download.html)
 [Code Annotation](https://github.com/thamara/vscode-code-annotation)
