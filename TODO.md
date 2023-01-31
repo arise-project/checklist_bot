@@ -1,3 +1,10 @@
+https://medium.com/@snehal.katare/book-summary-the-decision-book-fifty-models-for-strategic-thinking-ad866b60fa40
+
+https://beepb00p.xyz/annotating.html
+https://borretti.me/article/unbundling-tools-for-thought
+
+https://tana.inc/
+
 [High-performance inference of OpenAI's Whisper automatic speech recognition (ASR) model:](https://github.com/ggerganov/whisper.cpp)
 
 [Active Knowledge in Software Development](https://stayrelevant.globant.com/en/technology/agile-delivery/active-knowledge-in-software-development/)
