@@ -1,3 +1,8 @@
+(AI Cover Letter Generator)[https://tally.work/]
+(Automatic, AI-generated interview notes)[https://www.metaview.ai/notes]
+(SummarizeAnyMeeting In Seconds)[https://www.meetjamie.ai/]
+(https://github.com/varunshenoy/GraphGPT)[https://github.com/varunshenoy/GraphGPT]
+
 https://medium.com/@snehal.katare/book-summary-the-decision-book-fifty-models-for-strategic-thinking-ad866b60fa40
 
 https://beepb00p.xyz/annotating.html
