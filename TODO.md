@@ -1,3 +1,5 @@
+[Haskell is not category theory](https://pema.dev/2023/02/01/haskell-not-ct/)
+[A secure honeypot framework low code, extremely easy to configure by yaml](https://github.com/mariocandela/beelzebub)
 [Tp-Note - Minimalistic note taking: save and edit your clipboard content as a note file](https://blog.getreu.net/projects/tp-note/)
 (AI Cover Letter Generator)[https://tally.work/]
 (Automatic, AI-generated interview notes)[https://www.metaview.ai/notes]
